@@ -1,38 +1,83 @@
-import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Image } from "@nextui-org/react";
+"use client";
+
+import { Card, CardHeader, CardBody, CardFooter, Divider, Link, useDisclosure } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
 import { Casa } from "@/types/Casa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import CasaModal from "./CasaModal";
+import 'swiper/css/bundle';
+
+// Iconos
 
 export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
     return (
-        <Card className="max-w-[400px]">
-            <CardHeader className="flex gap-3">
-                {casa.imagenes?.map((imagen) => (
-                    <Image
-                        alt="nextui logo"
-                        height={40}
-                        radius="sm"
-                        src={imagen.img}
-                        width={40}
-                    />
-                ))}
-                <div className="flex flex-col">
-                    <p className="text-md">{casa.nombre}</p>
-                    <p className="text-small text-default-500">nextui.org</p>
-                </div>
+        <Card className="w-full md:h-fit" shadow="md">
+            <CardHeader className="p-0">
+                <Swiper
+                    modules={[Pagination]}
+                    pagination={{ dynamicBullets: true }}
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    className="w-full h-[300px] md:h-[500px] mySwiper custom-swiper"
+                    loop
+                >
+                    {casa.imagenes?.map((imagen) => (
+                        <SwiperSlide key={imagen.id}>
+                            <img
+                                alt={casa.nombre}
+                                src={imagen.img}
+                                className="w-full h-full object-cover"
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </CardHeader>
             <Divider />
             <CardBody>
-                <p>Make beautiful websites regardless of your design experience.</p>
+                <div className="flex flex-col space-y-8">
+                    <p className="text-lg md:text-2xl font-semibold">{casa.nombre}</p>
+                    <CasaInfo casa={casa} />
+                </div>
             </CardBody>
             <Divider />
             <CardFooter>
-                <Link
-                    isExternal
-                    showAnchorIcon
-                    href="https://github.com/nextui-org/nextui"
-                >
-                    Visit source code on GitHub.
-                </Link>
+                <div className="flex flex-row w-full justify-between items-center p-2">
+                    <p className="font-semibold text-lg md:text-2xl">${casa.precio?.toLocaleString()} MXN</p>
+
+                    <Button color="primary" variant="solid" size="lg" className="md:text-xl" onPress={onOpen}>
+                        Ver más
+                    </Button>
+                </div>
             </CardFooter>
+            {/* Modal para mostrar más información */}
+            <CasaModal isOpen={isOpen} onOpenChange={onOpenChange} casa={casa} />
         </Card>
+    );
+}
+
+function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
+    return (
+        <div className="flex flex-row w-full justify-around">
+            <div className="flex flex-col align-middle items-center">
+                <img src="./terreno.svg" alt="Terreno" className="h-10 md:h-14 w-fit" />
+                <p className="text-sm md:text-lg text-default-500">{casa.terrenoTotal} m²</p>
+            </div>
+            <div className="flex flex-col align-middle items-center">
+                <img src="./recamara.svg" alt="Recámaras" className="h-10 md:h-14 w-fit" />
+                <p className="text-sm md:text-lg text-default-500" >{casa.recamaras} Recamaras</p>
+            </div>
+            <div className="flex flex-col align-middle items-center">
+                <img src="./bano.svg" alt="Baños" className="h-10 w-fit md:h-14 fill-white" />
+                <p className="text-sm md:text-lg text-default-500" >{casa.banos} Baños</p>
+            </div>
+            <div className="flex flex-col align-middle items-center">
+                <img src="./estacionamiento.svg" alt="Estacionamiento" className="h-10 md:h-14 w-fit mt-2" />
+                <p className="-mt-2 text-sm md:text-lg text-default-500">{casa.estacionamientos} Cajones</p>
+            </div>
+        </div>
     );
 }
