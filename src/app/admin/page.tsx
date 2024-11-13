@@ -8,17 +8,18 @@ import { CasaImg } from "@/types/CasaImg";
 import { Casa } from "@/types/Casa";
 import { v4 as uuidv4 } from "uuid";
 import { addCasa } from "@/server";
+import alert from "@/utils/Alert";
 
 export default function Admin() {
     const [images, setImages] = useState<File[]>([null as any]);
     const [formData, setFormData] = useState<Casa>({
         id: uuidv4(),
         nombre: "",
-        precio: 0,
-        terrenoTotal: 0,
-        recamaras: 0,
-        banos: 0,
-        estacionamientos: 0,
+        precio: undefined,
+        terrenoTotal: undefined,
+        recamaras: undefined,
+        banos: undefined,
+        estacionamientos: undefined,
         antiguedad: "nueva",
         descripcion: "",
         imagenes: []
@@ -31,7 +32,21 @@ export default function Admin() {
     ];
 
     const handleInputChange = (e: any) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        if (name === "precio") {
+            // Remueve las comas antes de guardar en el estado
+            const numericValue = Number(value.replace(/,/g, ""));
+            setFormData({ ...formData, [name]: numericValue });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
+    };
+
+    // Función para agregar comas como separadores de miles
+    const formatNumberWithCommas = (num: number | undefined) => {
+        if (num === undefined) return "";
+        return num.toLocaleString("en-US");
     };
 
     async function handleSave() {
@@ -63,29 +78,33 @@ export default function Admin() {
             setFormData({
                 id: uuidv4(),
                 nombre: "",
-                precio: 0,
-                terrenoTotal: 0,
-                recamaras: 0,
-                banos: 0,
-                estacionamientos: 0,
+                precio: undefined,
+                terrenoTotal: undefined,
+                recamaras: undefined,
+                banos: undefined,
+                estacionamientos: undefined,
                 antiguedad: "nueva",
                 descripcion: "",
                 imagenes: []
             });
+            alert("Casa guardada", "success");
+            setImages([null as any]);
         } catch (error) {
             setLoading(false);
             setFormData({
                 id: uuidv4(),
                 nombre: "",
-                precio: 0,
-                terrenoTotal: 0,
-                recamaras: 0,
-                banos: 0,
-                estacionamientos: 0,
+                precio: undefined,
+                terrenoTotal: undefined,
+                recamaras: undefined,
+                banos: undefined,
+                estacionamientos: undefined,
                 antiguedad: "nueva",
                 descripcion: "",
                 imagenes: []
             });
+            setImages([null as any]);
+            alert("Error al guardar la casa", "error");
         }
     }
 
@@ -107,8 +126,8 @@ export default function Admin() {
                         color="primary"
                         name="precio"
                         label="Precio"
-                        type="number"
-                        value={formData.precio?.toString()}
+                        type="text"
+                        value={formatNumberWithCommas(formData.precio)}
                         onChange={handleInputChange}
                         size="lg"
                     />
