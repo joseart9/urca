@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <section className="min-h-screen bg-slate-100">
-      <section className="flex flex-col w-full space-y-4 p-4 md:grid md:grid-cols-3 md:min-h-screen md:gap-5 md:justify-center md:space-y-0 md:pl-40 md:pr-40">
+      <section className="flex flex-wrap justify-center gap-5 p-4 md:pl-40 md:pr-40">
         {casas.map((casa) => (
           <CasaCard key={casa.id} casa={casa} />
         ))}
