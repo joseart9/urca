@@ -16,33 +16,42 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1 text-default-800">{casa.nombre}</ModalHeader>
-                            <ModalBody>
-                                <Swiper
-                                    modules={[Pagination]}
-                                    pagination={{ dynamicBullets: true }}
-                                    spaceBetween={10}
-                                    slidesPerView={1}
-                                    className="w-full h-[300px] md:h-[500px] mySwiper custom-swiper rounded-xl mb-5"
-                                    loop
-                                >
-                                    {casa.imagenes?.map((imagen) => (
-                                        <SwiperSlide key={imagen.id}>
-                                            <img
-                                                alt={casa.nombre}
-                                                src={imagen.img}
-                                                className="w-full h-full object-cover rounded-xl"
-                                            />
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
+                            <ModalBody className="flex flex-col space-y-4">
+                                <div className="flex-grow-0 h-[300px] md:h-[500px]">
+                                    <Swiper
+                                        modules={[Pagination]}
+                                        pagination={{ dynamicBullets: true }}
+                                        spaceBetween={10}
+                                        slidesPerView={1}
+                                        className="w-full h-full mySwiper custom-swiper rounded-xl"
+                                        loop
+                                    >
+                                        {casa.imagenes?.map((imagen) => (
+                                            <SwiperSlide key={imagen.id}>
+                                                <img
+                                                    alt={casa.nombre}
+                                                    src={imagen.img}
+                                                    className="w-full h-full object-cover rounded-xl"
+                                                />
+                                            </SwiperSlide>
+                                        ))}
+                                    </Swiper>
+                                </div>
                                 <CasaInfo casa={casa} />
                                 <Divider />
-                                <p className="p-2 text-default-800 text-lg">{casa.descripcion}</p>
+                                <p className="text-default-800 text-md">{casa.descripcion}</p>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="primary" className="text-xl" size="lg" onPress={onClose}>
-                                    <WaIcon />Informes
-                                </Button>
+                                <div className="flex flex-row items-center justify-between w-full p-2">
+
+
+                                    <h1 className="font-semibold text-lg text-default-800">
+                                        ${Number(casa.precio).toLocaleString()} MXN
+                                    </h1>
+                                    <Button color="primary" className="text-lg" size="md" onPress={onClose}>
+                                        <WaIcon />Informes
+                                    </Button>
+                                </div>
                             </ModalFooter>
                         </>
                     )}
