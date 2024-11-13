@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Personalización de los bullets de paginación */
+.custom-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  text-align: center;
+  line-height: 12px;
+  font-size: 12px;
+  color: #000;
+  opacity: 1;
+  background: #3f3f46;
+}
+
+.custom-swiper .swiper-pagination-bullet-active {
+  color: #fff;
+  background: #006fee;
+}

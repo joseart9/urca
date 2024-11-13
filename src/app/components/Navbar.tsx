@@ -31,13 +31,13 @@ export default function App({ children }: Readonly<{ children: React.ReactNode }
 
                 <NavbarContent className="sm:hidden pr-3" justify="center">
                     <NavbarBrand>
-                        <p className="font-bold text-inherit">LOGO</p>
+                        <img src="/logo.svg" alt="Logo" className="h-16 w-auto object-cover" />
                     </NavbarBrand>
                 </NavbarContent>
 
                 <NavbarContent className="hidden sm:flex gap-4" justify="center">
                     <NavbarBrand>
-                        <p className="font-bold text-inherit">LOGO</p>
+                        <img src="/logo.svg" alt="Logo" className="h-16 w-auto" />
                     </NavbarBrand>
                 </NavbarContent>
 
