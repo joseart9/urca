@@ -11,7 +11,7 @@ const WaIcon = () => (
 export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isOpen: boolean, onOpenChange: (open: boolean) => void, casa: Casa }>) {
     return (
         <>
-            <Modal hideCloseButton isOpen={isOpen} onOpenChange={onOpenChange} placement="bottom-center" scrollBehavior="inside" >
+            <Modal size="xl" hideCloseButton isOpen={isOpen} onOpenChange={onOpenChange} placement="bottom-center" scrollBehavior="inside" >
                 <ModalContent>
                     {(onClose) => (
                         <>

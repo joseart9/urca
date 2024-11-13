@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import ImageUpload from "./components/ImageUpload";
 import { uploadImageToImgBB } from "@/utils/uploadImageToImgBB";
@@ -23,12 +23,19 @@ export default function Admin() {
         descripcion: "",
         imagenes: []
     });
+    const [loading, setLoading] = useState(false);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const casaAntiguedad = [
+        { key: "nueva", label: "Nueva" },
+        { key: "usada", label: "Usada" },
+    ];
+
+    const handleInputChange = (e: any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     async function handleSave() {
+        setLoading(true);
         // Cargar imágenes a ImgBB
         const uploadedImages = await Promise.all(
             images.map(async (image) => {
@@ -52,17 +59,38 @@ export default function Admin() {
         // Guardar en la base de datos
         try {
             await addCasa(casaData);
-            alert("Casa guardada");
+            setLoading(false);
+            setFormData({
+                id: uuidv4(),
+                nombre: "",
+                precio: 0,
+                terrenoTotal: 0,
+                recamaras: 0,
+                banos: 0,
+                estacionamientos: 0,
+                antiguedad: "nueva",
+                descripcion: "",
+                imagenes: []
+            });
         } catch (error) {
-            alert("Error al guardar la casa");
+            setLoading(false);
+            setFormData({
+                id: uuidv4(),
+                nombre: "",
+                precio: 0,
+                terrenoTotal: 0,
+                recamaras: 0,
+                banos: 0,
+                estacionamientos: 0,
+                antiguedad: "nueva",
+                descripcion: "",
+                imagenes: []
+            });
         }
     }
 
     return (
-        <div>
-            <section>
-                <ImageUpload images={images} setImages={setImages} />
-            </section>
+        <div className="flex flex-col min-h-screen">
             <section>
                 <form className="flex h-full flex-col p-2 space-y-3">
                     <Input
@@ -79,6 +107,7 @@ export default function Admin() {
                         color="primary"
                         name="precio"
                         label="Precio"
+                        type="number"
                         value={formData.precio?.toString()}
                         onChange={handleInputChange}
                         size="lg"
@@ -88,6 +117,7 @@ export default function Admin() {
                         color="primary"
                         name="terrenoTotal"
                         label="Terreno Total"
+                        type="number"
                         value={formData.terrenoTotal?.toString()}
                         onChange={handleInputChange}
                         size="lg"
@@ -97,6 +127,7 @@ export default function Admin() {
                         color="primary"
                         name="recamaras"
                         label="Recamaras"
+                        type="number"
                         value={formData.recamaras?.toString()}
                         onChange={handleInputChange}
                         size="lg"
@@ -106,6 +137,7 @@ export default function Admin() {
                         color="primary"
                         name="banos"
                         label="Baños"
+                        type="number"
                         value={formData.banos?.toString()}
                         onChange={handleInputChange}
                         size="lg"
@@ -115,20 +147,27 @@ export default function Admin() {
                         color="primary"
                         name="estacionamientos"
                         label="Estacionamientos"
+                        type="number"
                         value={formData.estacionamientos?.toString()}
                         onChange={handleInputChange}
                         size="lg"
                     />
-                    <Input
+                    <Select
                         variant="bordered"
                         color="primary"
                         name="antiguedad"
                         label="Antiguedad"
-                        value={formData.antiguedad}
+                        selectedKeys={[formData.antiguedad] as string[]}
                         onChange={handleInputChange}
                         size="lg"
-                    />
-                    <Input
+                    >
+                        {casaAntiguedad.map((option) => (
+                            <SelectItem key={option.key} value={option.key}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
+                    <Textarea
                         variant="bordered"
                         color="primary"
                         name="descripcion"
@@ -137,11 +176,17 @@ export default function Admin() {
                         onChange={handleInputChange}
                         size="lg"
                     />
-                    <Button color="primary" onPress={handleSave} variant="solid">
-                        Guardar
-                    </Button>
                 </form>
             </section>
+            <section>
+                <ImageUpload images={images} setImages={setImages} />
+            </section>
+            <div className="flex w-full p-2 justify-end">
+                <Button color="primary" onPress={handleSave} variant="solid" isLoading={loading}>
+                    Guardar
+                </Button>
+            </div>
+
         </div>
     );
 }
