@@ -27,6 +27,9 @@ export default function App({ children }: Readonly<{ children: React.ReactNode }
             >
                 <NavbarContent className="sm:hidden" justify="start">
                     <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+                    <p className="font-semibold text-sm uppercase">
+                        Urca Bienes Raíces
+                    </p>
                 </NavbarContent>
 
                 <NavbarContent className="sm:hidden pr-3" justify="center">

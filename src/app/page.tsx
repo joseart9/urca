@@ -14,6 +14,12 @@ export default function Home() {
 
   return (
     <section className="min-h-screen bg-slate-100">
+      <div className="flex justify-start text-xs pt-2 p-2 text-default-500 align-middle bg-slate-200">
+        <h1 >
+          Claudia Uribe &nbsp;|&nbsp; Asesor Inmobiliario
+        </h1>
+      </div>
+
       <section className="flex flex-wrap justify-center gap-5 p-4 md:pl-40 md:pr-40">
         {casas.map((casa) => (
           <CasaCard key={casa.id} casa={casa} />
