@@ -15,7 +15,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
-        <Card className="w-full md:h-fit md:w-[600px]" shadow="md">
+        <Card className="w-full md:h-fit md:w-[600px] rounded-none" shadow="md">
             <CardHeader className="p-0">
                 <Swiper
                     modules={[Pagination]}
