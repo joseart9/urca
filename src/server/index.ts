@@ -6,6 +6,8 @@ import {
   addDoc,
   getDocs,
   doc,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import db from "@/db";
 import { Casa } from "@/types/Casa";
@@ -45,5 +47,35 @@ export async function getAllCasas(): Promise<Casa[]> {
   } catch (error) {
     console.error("Error al obtener las casas: ", error);
     throw new Error("No se pudo obtener la lista de casas");
+  }
+}
+
+export async function deleteCasa(id: string) {
+  try {
+    // Referencia al documento de la casa con el ID especificado
+    const casaDoc = doc(firestore, "casas", id);
+
+    // Elimina el documento
+    await deleteDoc(casaDoc);
+
+    return `Casa con ID ${id} eliminada correctamente.`;
+  } catch (error) {
+    console.error("Error al eliminar la casa: ", error);
+    throw new Error("No se pudo eliminar la casa");
+  }
+}
+
+export async function updateCasa(id: string, updatedData: Partial<Casa>) {
+  try {
+    // Referencia al documento de la casa con el ID especificado
+    const casaDoc = doc(firestore, "casas", id);
+
+    // Actualiza los campos especificados en `updatedData`
+    await updateDoc(casaDoc, updatedData);
+
+    return `Casa con ID ${id} actualizada correctamente.`;
+  } catch (error) {
+    console.error("Error al actualizar la casa: ", error);
+    throw new Error("No se pudo actualizar la casa");
   }
 }

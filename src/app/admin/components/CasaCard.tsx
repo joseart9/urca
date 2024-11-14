@@ -5,9 +5,9 @@ import { Button } from "@nextui-org/button";
 import { Casa } from "@/types/Casa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-import CasaModal from "./CasaModal";
+import CasaModal from "@/app/components/CasaModal";
 import 'swiper/css/bundle';
-import CasaInfo from "./CasaInfo";
+import CasaInfo from "@/app/components/CasaInfo";
 
 // Iconos
 
