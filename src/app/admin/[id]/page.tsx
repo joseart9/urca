@@ -1,6 +1,6 @@
 "use client";
 
-import { getCasaById, updateCasa } from "@/server";
+import { getCasaById, updateCasa, deleteCasa } from "@/server";
 import { Casa } from "@/types/Casa";
 import { use, useState, useEffect } from "react";
 import { Button, Input, Select, SelectItem, Spinner, Textarea } from "@nextui-org/react";
@@ -8,6 +8,7 @@ import alert from "@/utils/Alert";
 import { uploadImageToImgBB } from "@/utils/uploadImageToImgBB";
 import ImageUpload from "@/app/admin/components/ImageUpload";
 import { CasaImg } from "@/types/CasaImg";
+import { useRouter } from 'next/navigation'
 
 export default function AdminEdit({
     params,
@@ -32,8 +33,11 @@ export default function AdminEdit({
 
     const [loading, setLoading] = useState(true);
     const [loadingSave, setLoadingSave] = useState(false);
+    const [loadingDelete, setLoadingDelete] = useState(false);
     const { id: casaId } = use(params);
     const [error, setError] = useState(false);
+
+    const router = useRouter();
 
     useEffect(() => {
         setLoading(true);
@@ -42,7 +46,7 @@ export default function AdminEdit({
                 setFormData({
                     id: data.id,
                     nombre: data.nombre || '',
-                    precio: data.precio || 0,
+                    precio: Number(formatNumberWithCommas(data.precio)) || 0,
                     terrenoTotal: data.terrenoTotal || 0,
                     terrenoConstruccion: data.terrenoConstruccion || 0,
                     recamaras: data.recamaras || 0,
@@ -107,10 +111,14 @@ export default function AdminEdit({
             validImages.push(...imagesSaved);
         }
 
+        // Remueve las comas antes de guardar en el estado
+        const numericValue = Number(String(formData.precio).replace(/,/g, ""));
+
         // Crear un objeto `casa` actualizado con las imágenes válidas
         const casaData: Casa = {
             ...formData,
             imagenes: validImages,
+            precio: numericValue,
         };
 
         // Guardar en la base de datos
@@ -141,6 +149,19 @@ export default function AdminEdit({
         </div>
     );
 
+
+    function handleDelete(e: any): void {
+        setLoadingDelete(true);
+        deleteCasa(formData.id).then(() => {
+            alert("Casa eliminada", "success");
+            setLoadingDelete(false);
+            router.push(`/admin`);
+        }).catch((error) => {
+            alert("Error al eliminar la casa, contacte a un administrador", "error");
+            console.log("Error al eliminar la casa: ", error);
+            setLoadingDelete(false);
+        });
+    }
 
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
@@ -247,7 +268,10 @@ export default function AdminEdit({
             <section>
                 <ImageUpload images={images} setImages={setImages} imagesSaved={imagesSaved} setImagesSaved={setImagesSaved} />
             </section>
-            <div className="flex w-full p-2 justify-end">
+            <div className="flex w-full p-2 justify-between">
+                <Button color="danger" onPress={handleDelete} variant="flat" isLoading={loadingDelete}>
+                    Eliminar
+                </Button>
                 <Button color="primary" onPress={handleSave} variant="solid" isLoading={loadingSave}>
                     Guardar
                 </Button>

@@ -55,13 +55,26 @@ export async function getAllCasas(): Promise<Casa[]> {
 
 export async function deleteCasa(id: string) {
   try {
-    // Referencia al documento de la casa con el ID especificado
-    const casaDoc = doc(firestore, "casas", id);
+    // Referencia a la colección "casas"
+    const casasCollection = collection(firestore, "casas");
 
-    // Elimina el documento
-    await deleteDoc(casaDoc);
+    // Crea una consulta para buscar el documento con el campo `id` igual al valor proporcionado
+    const q = query(casasCollection, where("id", "==", id));
 
-    return `Casa con ID ${id} eliminada correctamente.`;
+    // Ejecuta la consulta
+    const querySnapshot = await getDocs(q);
+
+    // Verifica si algún documento coincide con la consulta
+    if (!querySnapshot.empty) {
+      // Itera sobre los documentos coincidentes y los elimina
+      for (const docSnapshot of querySnapshot.docs) {
+        await deleteDoc(docSnapshot.ref);
+      }
+      return `Casa con ID ${id} eliminada correctamente.`;
+    } else {
+      console.warn(`Casa con ID ${id} no encontrada.`);
+      return `No se encontró una casa con el ID ${id}.`;
+    }
   } catch (error) {
     console.error("Error al eliminar la casa: ", error);
     throw new Error("No se pudo eliminar la casa");
