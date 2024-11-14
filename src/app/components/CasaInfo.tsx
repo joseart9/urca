@@ -25,7 +25,7 @@ export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
                 <p className="-mt-2 text-sm md:text-lg text-default-500 w-full overflow-hidden whitespace-nowrap text-ellipsis">{casa.estacionamientos} Cajones</p>
             </div>
             <div className="flex flex-col align-middle text-center items-center">
-                <Chip color="primary" size="lg" className="w-fit uppercase">
+                <Chip color="primary" size="lg" className="w-fit uppercase" variant="flat" >
                     {casa.antiguedad}
                 </Chip>
             </div>
