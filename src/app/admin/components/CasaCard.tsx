@@ -8,15 +8,17 @@ import { Pagination } from "swiper/modules";
 import CasaModal from "@/app/components/CasaModal";
 import 'swiper/css/bundle';
 import CasaInfo from "@/app/components/CasaInfo";
+import { useRouter } from 'next/navigation'
 
 // Iconos
 
 export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const router = useRouter()
 
     return (
-        <Card className="w-full md:h-fit md:w-[600px] rounded-none" shadow="md">
+        <Card className="w-full md:h-fit md:w-[600px] rounded-none" shadow="md" isPressable onPress={() => router.push(`/admin/${casa.id}`)}>
             <CardHeader className="p-0">
                 <Swiper
                     modules={[Pagination]}
@@ -48,10 +50,6 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
             <CardFooter>
                 <div className="flex flex-row w-full justify-between items-center p-2">
                     <p className="font-semibold text-lg md:text-2xl">${Number(casa.precio).toLocaleString()} MXN</p>
-
-                    <Button color="primary" variant="solid" size="lg" className="md:text-xl" onPress={onOpen}>
-                        Ver más
-                    </Button>
                 </div>
             </CardFooter>
             {/* Modal para mostrar más información */}
