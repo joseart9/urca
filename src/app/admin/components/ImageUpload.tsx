@@ -2,7 +2,6 @@ import { CasaImg } from '@/types/CasaImg';
 import { Button } from '@nextui-org/button';
 
 export default function ImageUpload({ images, setImages, imagesSaved, setImagesSaved }: { images: any[]; setImages: any; imagesSaved?: CasaImg[]; setImagesSaved?: any }) {
-    // Agrega un elemento `null` al inicio si no hay uno
     const displayImages = imagesSaved && imagesSaved.length > 0 && imagesSaved[0] !== null ? [...imagesSaved] : imagesSaved;
 
     function handleUpload(index: number) {

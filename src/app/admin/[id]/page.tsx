@@ -21,6 +21,7 @@ export default function AdminEdit({
         nombre: '',
         precio: 0,
         terrenoTotal: 0,
+        terrenoConstruccion: 0,
         recamaras: 0,
         banos: 0,
         estacionamientos: 0,
@@ -30,6 +31,7 @@ export default function AdminEdit({
     });
 
     const [loading, setLoading] = useState(true);
+    const [loadingSave, setLoadingSave] = useState(false);
     const { id: casaId } = use(params);
     const [error, setError] = useState(false);
 
@@ -42,6 +44,7 @@ export default function AdminEdit({
                     nombre: data.nombre || '',
                     precio: data.precio || 0,
                     terrenoTotal: data.terrenoTotal || 0,
+                    terrenoConstruccion: data.terrenoConstruccion || 0,
                     recamaras: data.recamaras || 0,
                     banos: data.banos || 0,
                     estacionamientos: data.estacionamientos || 0,
@@ -86,7 +89,7 @@ export default function AdminEdit({
     };
 
     async function handleSave() {
-        setLoading(true);
+        setLoadingSave(true);
         // Cargar imágenes a ImgBB
         const uploadedImages = await Promise.all(
             images.map(async (image) => {
@@ -113,11 +116,11 @@ export default function AdminEdit({
         // Guardar en la base de datos
         try {
             await updateCasa(casaData.id, casaData);
-            setLoading(false);
+            setLoadingSave(false);
             alert("Casa guardada", "success");
             setImages([null as any]);
         } catch (error) {
-            setLoading(false);
+            setLoadingSave(false);
             setImages([null as any]);
             alert("Error al guardar la casa, contacte a un administrador", "error");
             console.log("Error al guardar la casa: ", error);
@@ -172,6 +175,16 @@ export default function AdminEdit({
                         label="Terreno Total"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
+                        onChange={handleInputChange}
+                        size="lg"
+                    />
+                    <Input
+                        variant="bordered"
+                        color="primary"
+                        name="terrenoConstruccion"
+                        label="Terreno Construccion"
+                        type="number"
+                        value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
                         size="lg"
                     />
@@ -235,7 +248,7 @@ export default function AdminEdit({
                 <ImageUpload images={images} setImages={setImages} imagesSaved={imagesSaved} setImagesSaved={setImagesSaved} />
             </section>
             <div className="flex w-full p-2 justify-end">
-                <Button color="primary" onPress={handleSave} variant="solid" isLoading={loading}>
+                <Button color="primary" onPress={handleSave} variant="solid" isLoading={loadingSave}>
                     Guardar
                 </Button>
             </div>

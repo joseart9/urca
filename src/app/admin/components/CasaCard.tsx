@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link, useDisclosure } from "@nextui-org/react";
-import { Button } from "@nextui-org/button";
 import { Casa } from "@/types/Casa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";

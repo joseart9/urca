@@ -1,11 +1,16 @@
 import { Casa } from "@/types/Casa";
+import { Chip } from "@nextui-org/react";
 
 export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
     return (
-        <div className="grid grid-cols-4 grid-flow-row w-full justify-around">
+        <div className="grid grid-cols-3 grid-flow-row w-full justify-around text-center items-center">
             <div className="flex flex-col align-middle text-center items-center">
-                <img src="./terreno.svg" alt="Terreno" className="h-10 md:h-14 w-fit" />
+                <img src="./terrenoTotal.svg" alt="Terreno" className="h-10 md:h-14 w-fit" />
                 <p className="text-sm md:text-lg text-default-500 w-full overflow-hidden whitespace-nowrap text-ellipsis">{casa.terrenoTotal} m²</p>
+            </div>
+            <div className="flex flex-col align-middle text-center items-center">
+                <img src="./terrenoConstruccion.svg" alt="Terreno" className="h-10 md:h-14 w-fit" />
+                <p className="text-sm md:text-lg text-default-500 w-full overflow-hidden whitespace-nowrap text-ellipsis">{casa.terrenoConstruccion} m²</p>
             </div>
             <div className="flex flex-col align-middle text-center items-center">
                 <img src="./recamara.svg" alt="Recámaras" className="h-10 md:h-14 w-fit" />
@@ -18,6 +23,11 @@ export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
             <div className="flex flex-col align-middle text-center items-center">
                 <img src="./estacionamiento.svg" alt="Estacionamiento" className="h-10 md:h-14 w-fit mt-2" />
                 <p className="-mt-2 text-sm md:text-lg text-default-500 w-full overflow-hidden whitespace-nowrap text-ellipsis">{casa.estacionamientos} Cajones</p>
+            </div>
+            <div className="flex flex-col align-middle text-center items-center">
+                <Chip color="primary" size="lg" className="w-fit uppercase">
+                    {casa.antiguedad}
+                </Chip>
             </div>
         </div>
     );

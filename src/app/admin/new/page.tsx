@@ -17,6 +17,7 @@ export default function Admin() {
         nombre: "",
         precio: undefined,
         terrenoTotal: undefined,
+        terrenoConstruccion: undefined,
         recamaras: undefined,
         banos: undefined,
         estacionamientos: undefined,
@@ -80,6 +81,7 @@ export default function Admin() {
                 nombre: "",
                 precio: undefined,
                 terrenoTotal: undefined,
+                terrenoConstruccion: undefined,
                 recamaras: undefined,
                 banos: undefined,
                 estacionamientos: undefined,
@@ -91,20 +93,8 @@ export default function Admin() {
             setImages([null as any]);
         } catch (error) {
             setLoading(false);
-            setFormData({
-                id: uuidv4(),
-                nombre: "",
-                precio: undefined,
-                terrenoTotal: undefined,
-                recamaras: undefined,
-                banos: undefined,
-                estacionamientos: undefined,
-                antiguedad: "nueva",
-                descripcion: "",
-                imagenes: []
-            });
-            setImages([null as any]);
-            alert("Error al guardar la casa", "error");
+            alert("Error al guardar la casa, contacte a un administrador", "error");
+            console.log("Error al guardar la casa: ", error);
         }
     }
 
@@ -141,6 +131,16 @@ export default function Admin() {
                         label="Terreno Total"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
+                        onChange={handleInputChange}
+                        size="lg"
+                    />
+                    <Input
+                        variant="bordered"
+                        color="primary"
+                        name="terrenoConstruccion"
+                        label="Terreno Construccion"
+                        type="number"
+                        value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
                         size="lg"
                     />
