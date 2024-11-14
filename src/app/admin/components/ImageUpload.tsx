@@ -10,16 +10,22 @@ export default function ImageUpload({ images, setImages, imagesSaved, setImagesS
         input.accept = 'image/*';
         input.onchange = (e) => {
             if (e.target) {
-                const newImages = Array.from((e.target as HTMLInputElement).files || []);
-                setImages((prevImages: any) => {
-                    const updatedImages = [...prevImages];
-                    updatedImages[index] = newImages[0];
-                    return updatedImages;
-                });
-                addNewUpload();
+                setTimeout(() => {
+                    const newImages = Array.from((e.target as HTMLInputElement).files || []);
+                    if (newImages.length > 0) {
+                        setImages((prevImages: any) => {
+                            const updatedImages = [...prevImages];
+                            updatedImages[index] = newImages[0];
+                            return updatedImages;
+                        });
+                        addNewUpload();
+                    }
+                }, 100); // Puedes ajustar el tiempo de espera según sea necesario
             }
         };
         input.click();
+        input.remove(); // Esto fuerza al navegador a refrescar el input y sus eventos
+        input.value = ''; // Esto asegura que el cambio sea detectado cada vez
     }
 
     function addNewUpload() {
