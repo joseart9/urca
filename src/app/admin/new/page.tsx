@@ -100,7 +100,7 @@ export default function Admin() {
 
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
-            <h1 className="text-lg uppercase text-default-300 text-center pt-2">
+            <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
                 Agregar Casa
             </h1>
             <section>
