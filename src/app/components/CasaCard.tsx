@@ -44,9 +44,9 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
                     <CasaInfo casa={casa} />
                 </div>
             </CardBody>
-            <Divider />
+
             <CardFooter>
-                <div className="flex flex-row w-full justify-between items-center p-2">
+                <div className="flex flex-row w-full justify-between items-center p-2 text-center">
                     <p className="font-semibold text-lg md:text-2xl">${Number(casa.precio).toLocaleString()} MXN</p>
 
                     <Button color="primary" variant="solid" size="lg" className="md:text-xl" onPress={onOpen}>

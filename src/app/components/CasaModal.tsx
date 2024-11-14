@@ -41,7 +41,7 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                                 </div>
                                 <CasaInfo casa={casa} />
                                 <Divider />
-                                <p className="text-default-800 text-md">{casa.descripcion}</p>
+                                <p className="whitespace-pre-wrap text-default-800 text-md">{casa.descripcion}</p>
                             </ModalBody>
                             <ModalFooter>
                                 <div className="flex flex-row items-center justify-between w-full p-2">

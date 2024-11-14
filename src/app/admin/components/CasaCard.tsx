@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardHeader, CardBody, CardFooter, Divider, Link, useDisclosure } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Divider, Link, useDisclosure, Button } from "@nextui-org/react";
 import { Casa } from "@/types/Casa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -17,7 +17,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
     const router = useRouter()
 
     return (
-        <Card className="w-full md:h-fit md:w-[600px] rounded-none" shadow="md" isPressable onPress={() => router.push(`/admin/${casa.id}`)}>
+        <Card className="w-full md:h-fit md:w-[600px] rounded-none" shadow="md">
             <CardHeader className="p-0">
                 <Swiper
                     modules={[Pagination]}
@@ -47,8 +47,11 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
             </CardBody>
             <Divider />
             <CardFooter>
-                <div className="flex flex-row w-full justify-between items-center p-2">
+                <div className="flex flex-row w-full justify-between items-center text-center p-2">
                     <p className="font-semibold text-lg md:text-2xl">${Number(casa.precio).toLocaleString()} MXN</p>
+                    <Button color="primary" size="lg" onPress={() => router.push(`/admin/${casa.id}`)}>
+                        Editar
+                    </Button>
                 </div>
             </CardFooter>
             {/* Modal para mostrar más información */}
