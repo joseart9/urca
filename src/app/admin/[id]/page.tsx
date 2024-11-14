@@ -27,6 +27,7 @@ export default function AdminEdit({
         banos: 0,
         estacionamientos: 0,
         antiguedad: 'nueva',
+        antiguedadTiempo: 0,
         descripcion: '',
         imagenes: []
     });
@@ -53,6 +54,7 @@ export default function AdminEdit({
                     banos: data.banos || 0,
                     estacionamientos: data.estacionamientos || 0,
                     antiguedad: data.antiguedad || 'nueva',
+                    antiguedadTiempo: data.antiguedadTiempo || 0,
                     descripcion: data.descripcion || '',
                     imagenes: data.imagenes || []
                 });
@@ -250,6 +252,18 @@ export default function AdminEdit({
                             </SelectItem>
                         ))}
                     </Select>
+                    {formData.antiguedad === "usada" && (
+                        <Input
+                            variant="bordered"
+                            color="primary"
+                            name="antiguedadTiempo"
+                            label="Años Antigüedad"
+                            type="number"
+                            value={formData.antiguedadTiempo?.toString()}
+                            onChange={handleInputChange}
+                            size="lg"
+                        />
+                    )}
                     <Textarea
                         variant="bordered"
                         color="primary"

@@ -26,7 +26,7 @@ export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
             </div>
             <div className="flex flex-col align-middle text-center items-center">
                 <Chip color="primary" size="lg" className="w-fit uppercase" variant="flat" >
-                    {casa.antiguedad}
+                    {casa.antiguedad === "nueva" ? "A Estrenar" : Number(casa.antiguedad) === 1 ? "1 Año" : `${casa.antiguedadTiempo} Años`}
                 </Chip>
             </div>
         </div>

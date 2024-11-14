@@ -109,7 +109,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="nombre"
-                        label="Nombre"
+                        label="Título"
                         value={formData.nombre}
                         onChange={handleInputChange}
                         size="lg"
@@ -128,7 +128,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="terrenoTotal"
-                        label="Terreno Total"
+                        label="Metros Terreno"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
                         onChange={handleInputChange}
@@ -138,7 +138,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="terrenoConstruccion"
-                        label="Terreno Construccion"
+                        label="Metros Construcción"
                         type="number"
                         value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
@@ -148,7 +148,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="recamaras"
-                        label="Recamaras"
+                        label="Recámaras"
                         type="number"
                         value={formData.recamaras?.toString()}
                         onChange={handleInputChange}
@@ -178,7 +178,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="antiguedad"
-                        label="Antiguedad"
+                        label="Antigüedad"
                         selectedKeys={[formData.antiguedad] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -189,6 +189,18 @@ export default function Admin() {
                             </SelectItem>
                         ))}
                     </Select>
+                    {formData.antiguedad === "usada" && (
+                        <Input
+                            variant="bordered"
+                            color="primary"
+                            name="estacionamientos"
+                            label="Años Antigüedad"
+                            type="number"
+                            value={formData.antiguedadTiempo?.toString()}
+                            onChange={handleInputChange}
+                            size="lg"
+                        />
+                    )}
                     <Textarea
                         variant="bordered"
                         color="primary"
