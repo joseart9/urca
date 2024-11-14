@@ -1,33 +1,15 @@
 "use client";
 import React from "react";
-import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 
-export default function App({ children }: Readonly<{ children: React.ReactNode }>) {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
-    ];
-
+export default function App({ children }: Readonly<{ children?: React.ReactNode }>) {
     return (
         <>
             <Navbar
                 isBordered
-                isMenuOpen={isMenuOpen}
-                onMenuOpenChange={setIsMenuOpen}
             >
                 <NavbarContent className="sm:hidden" justify="start">
-                    <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-                    <p className="font-semibold text-sm uppercase">
+                    <p className="font-semibold text-sm uppercase text-default-800">
                         Urca Bienes Raíces
                     </p>
                 </NavbarContent>
@@ -43,23 +25,6 @@ export default function App({ children }: Readonly<{ children: React.ReactNode }
                         <img src="/logo.svg" alt="Logo" className="h-16 w-auto" />
                     </NavbarBrand>
                 </NavbarContent>
-
-                <NavbarMenu>
-                    {menuItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`}>
-                            <Link
-                                className="w-full"
-                                color={
-                                    index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
-                                }
-                                href="#"
-                                size="lg"
-                            >
-                                {item}
-                            </Link>
-                        </NavbarMenuItem>
-                    ))}
-                </NavbarMenu>
             </Navbar>
             {children}
         </>

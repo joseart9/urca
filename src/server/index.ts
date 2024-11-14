@@ -6,6 +6,11 @@ import {
   addDoc,
   getDocs,
   doc,
+  deleteDoc,
+  updateDoc,
+  getDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import db from "@/db";
 import { Casa } from "@/types/Casa";
@@ -45,5 +50,80 @@ export async function getAllCasas(): Promise<Casa[]> {
   } catch (error) {
     console.error("Error al obtener las casas: ", error);
     throw new Error("No se pudo obtener la lista de casas");
+  }
+}
+
+export async function deleteCasa(id: string) {
+  try {
+    // Referencia al documento de la casa con el ID especificado
+    const casaDoc = doc(firestore, "casas", id);
+
+    // Elimina el documento
+    await deleteDoc(casaDoc);
+
+    return `Casa con ID ${id} eliminada correctamente.`;
+  } catch (error) {
+    console.error("Error al eliminar la casa: ", error);
+    throw new Error("No se pudo eliminar la casa");
+  }
+}
+
+export async function updateCasa(id: string, updatedData: Partial<Casa>) {
+  try {
+    // Referencia a la colección "casas"
+    const casasCollection = collection(firestore, "casas");
+
+    // Crea una consulta para buscar el documento donde el campo `id` coincide
+    const q = query(casasCollection, where("id", "==", id));
+
+    // Ejecuta la consulta
+    const querySnapshot = await getDocs(q);
+
+    // Verifica si algún documento coincide con la consulta
+    if (!querySnapshot.empty) {
+      // Extrae el primer documento coincidente
+      const docSnapshot = querySnapshot.docs[0];
+      const casaDoc = doc(firestore, "casas", docSnapshot.id);
+
+      // Actualiza los campos especificados en `updatedData`
+      await updateDoc(casaDoc, updatedData);
+
+      return `Casa con ID ${id} actualizada correctamente.`;
+    } else {
+      console.warn(`Casa con ID ${id} no encontrada.`);
+      return null; // Retorna null si no se encuentra un documento coincidente
+    }
+  } catch (error) {
+    console.error("Error al actualizar la casa: ", error);
+    throw new Error("No se pudo actualizar la casa");
+  }
+}
+
+export async function getCasaById(id: string): Promise<Casa | null> {
+  try {
+    // Referencia a la colección "casas"
+    const casasCollection = collection(firestore, "casas");
+
+    // Crea una consulta para buscar el documento donde el campo `id` coincide
+    const q = query(casasCollection, where("id", "==", id));
+
+    // Ejecuta la consulta
+    const querySnapshot = await getDocs(q);
+
+    // Verifica si algún documento coincide con la consulta
+    if (!querySnapshot.empty) {
+      // Extrae el primer documento coincidente
+      const docSnapshot = querySnapshot.docs[0];
+      return {
+        id: docSnapshot.id, // Usa el `docSnapshot.id` como el identificador único del documento
+        ...docSnapshot.data(),
+      } as Casa;
+    } else {
+      console.warn(`Casa con ID ${id} no encontrada.`);
+      return null; // Retorna null si no se encuentra un documento coincidente
+    }
+  } catch (error) {
+    console.error("Error al obtener la casa: ", error);
+    throw new Error("No se pudo obtener la casa");
   }
 }

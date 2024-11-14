@@ -5,6 +5,7 @@ export interface Casa {
   nombre?: string;
   precio?: number;
   terrenoTotal?: number;
+  terrenoConstruccion?: number;
   recamaras?: number;
   banos?: number;
   estacionamientos?: number;
