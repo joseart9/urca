@@ -267,6 +267,12 @@ export default function AdminEdit({
             </section>
             <section>
                 <ImageUpload images={images} setImages={setImages} imagesSaved={imagesSaved} setImagesSaved={setImagesSaved} />
+                <p>
+                    Cantidad de imagenes guardadas anteriormente: {imagesSaved.length}
+                </p>
+                <p>
+                    Cantidad de imagenes nuevas: {images.length - 1}
+                </p>
             </section>
             <div className="flex w-full p-2 justify-between">
                 <Button color="danger" onPress={handleDelete} variant="flat" isLoading={loadingDelete}>
