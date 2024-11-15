@@ -3,7 +3,7 @@ import { Chip, Tooltip } from "@nextui-org/react";
 
 export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
     return (
-        <div className="grid grid-cols-3 grid-flow-row w-full justify-around text-center items-center">
+        <div className="grid grid-cols-3 grid-flow-row w-full justify-around text-center items-center gap-7">
             <div className="flex flex-col align-middle text-center items-center">
                 <Tooltip color="primary" showArrow content="Terreno de Total" placement="top" className="font-bold">
                     <img src="./terrenoTotal.svg" alt="Terreno" className="h-10 md:h-14 w-fit" />
@@ -34,7 +34,7 @@ export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
                 </Tooltip>
                 <p className="-mt-2 text-sm md:text-lg text-default-500 w-full overflow-hidden whitespace-nowrap text-ellipsis">{casa.estacionamientos} Cajones</p>
             </div>
-            <div className="flex flex-col align-middle text-center items-center">
+            <div className="flex flex-col align-middle text-center items-center pr-2">
                 <Chip color="primary" size="lg" className="w-fit uppercase" variant="flat" >
                     {casa.antiguedad === "nueva" ? "A Estrenar" : Number(casa.antiguedad) === 1 ? "1 Año" : `${casa.antiguedadTiempo} Años`}
                 </Chip>
