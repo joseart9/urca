@@ -2,27 +2,31 @@
 
 import { Select, SelectItem } from "@nextui-org/react";
 import { Slider, SliderValue } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Filter({ filter, setFilter, classNames, variant }: { filter: any, setFilter: any, classNames?: string, variant?: "flat" | "underlined" }) {
     const filters = [
-        { key: "precio", label: "Precio" },
-        { key: "recamaras", label: "Habitaciones" },
-        { key: "banos", label: "Baños" },
-        { key: "estacionamientos", label: "Estacionamientos" },
-        { key: "terrenoConstruccion", label: "Área" },
-        { key: "antiguedad", label: "Antigüedad" },
-    ]
+        { key: "precio", label: "Precio", defaultValue: [1, 30000000] },
+        { key: "recamaras", label: "Habitaciones", defaultValue: [1, 10] },
+        { key: "banos", label: "Baños", defaultValue: [1, 10] },
+        { key: "estacionamientos", label: "Estacionamientos", defaultValue: [1, 10] },
+        { key: "terrenoConstruccion", label: "Área", defaultValue: [1, 1000] },
+        { key: "antiguedad", label: "Antigüedad", defaultValue: [1, 50] }
+    ];
 
-    const handleInputChange = (e: any) => {
-        const { name, value } = e.target;
-        setFilter({ ...filter, [name]: value });
+    const handleInputChange = (selectedKey: string) => {
+        const selectedFilter = filters.find((f) => f.key === selectedKey);
+        if (selectedFilter) {
+            setFilter({
+                key: selectedFilter.key,
+                value: selectedFilter.defaultValue,
+            });
+        }
     };
 
     const handleSliderChange = (value: SliderValue) => {
         setFilter({ ...filter, value: value });
     };
-
 
     return (
         <div className="flex flex-col w-full space-y-4">
@@ -33,15 +37,16 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                 variant="underlined"
                 placeholder="Filtrar por"
                 selectionMode="single"
-                selectedKeys={filter ? [filter.key] : []}
-                onClick={() => setFilter({ value: [0, 0] })}
-                onChange={handleInputChange}>
-                {filters.map((filter) => (
-                    <SelectItem key={filter.key} value={filter.key}>
-                        {filter.label}
+                selectedKeys={filter.key ? [filter.key] : []}
+                onSelectionChange={(keys) => handleInputChange(String(Array.from(keys)[0]))}
+            >
+                {filters.map((f) => (
+                    <SelectItem key={f.key} value={f.key}>
+                        {f.label}
                     </SelectItem>
                 ))}
-            </Select >
+            </Select>
+
             {filter.key === "precio" && (
                 <Slider
                     label="Precio"
@@ -51,7 +56,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     formatOptions={{ style: "currency", currency: "USD" }}
                     value={filter.value}
                     onChange={handleSliderChange}
-                    renderLabel={(value) => " "}
+                    renderLabel={() => " "}
                 />
             )}
 
@@ -62,7 +67,6 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     maxValue={10}
                     value={filter.value}
                     onChange={handleSliderChange}
-                    renderLabel={(value) => ``}
                     renderValue={() => `${filter.value[0]} - ${filter.value[1]}`}
                 />
             )}
@@ -74,7 +78,6 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     maxValue={10}
                     value={filter.value}
                     onChange={handleSliderChange}
-                    renderLabel={(value) => ``}
                     renderValue={() => `${filter.value[0]} - ${filter.value[1]}`}
                 />
             )}
@@ -86,7 +89,6 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     maxValue={10}
                     value={filter.value}
                     onChange={handleSliderChange}
-                    renderLabel={(value) => ``}
                     renderValue={() => `${filter.value[0]} - ${filter.value[1]}`}
                 />
             )}
@@ -98,7 +100,6 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     maxValue={1000}
                     value={filter.value}
                     onChange={handleSliderChange}
-                    renderLabel={(value) => ``}
                     renderValue={() => `${filter.value[0]} - ${filter.value[1]} m²`}
                 />
             )}
