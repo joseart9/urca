@@ -44,7 +44,7 @@ export default function Home() {
         </section>
       </section>
       <FilterModal isOpen={isOpen} onOpenChange={onOpenChange} filter={filter} setFilter={setFilter} />
-      <footer className="bg-slate-200 text-[#006FEE]/50 text-xs text-center pt-4 pb-2">
+      <footer className="bg-slate-200 text-[#006FEE]/50 text-md text-center pt-4 pb-2">
         <a href="https://www.instagram.com/araf.innovations/">
           Powered by Araf Innovations 2024
         </a>
