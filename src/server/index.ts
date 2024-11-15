@@ -32,13 +32,31 @@ export async function addCasa(casa: Casa) {
   }
 }
 
-export async function getAllCasas(): Promise<Casa[]> {
+export async function getAllCasas(filter?: {
+  key: string;
+  value: [number, number]; // Cambiamos a tipo array de números
+}): Promise<Casa[]> {
   try {
     // Referencia a la colección "casas"
     const casasCollection = collection(firestore, "casas");
 
-    // Obtiene todos los documentos de la colección "casas"
-    const snapshot = await getDocs(casasCollection);
+    let casasQuery;
+
+    // Verifica si el filtro está definido y aplica el rango
+    if (filter?.key && filter.value) {
+      const [min, max] = filter.value; // Usamos el rango directamente
+      casasQuery = query(
+        casasCollection,
+        where(filter.key, ">=", min),
+        where(filter.key, "<=", max)
+      );
+    } else {
+      // Si no hay filtro, obtiene todos los documentos
+      casasQuery = casasCollection;
+    }
+
+    // Obtiene los documentos según la consulta (con o sin filtro)
+    const snapshot = await getDocs(casasQuery);
 
     // Mapea los documentos a un array de objetos "Casa"
     const casas = snapshot.docs.map((doc) => ({

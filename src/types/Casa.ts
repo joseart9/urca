@@ -10,6 +10,7 @@ export interface Casa {
   banos?: number;
   estacionamientos?: number;
   antiguedad?: "nueva" | "usada";
+  antiguedadTiempo?: number;
   imagenes?: CasaImg[];
   descripcion?: string;
 }

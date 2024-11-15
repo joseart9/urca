@@ -21,7 +21,8 @@ export default function Admin() {
         recamaras: undefined,
         banos: undefined,
         estacionamientos: undefined,
-        antiguedad: "nueva",
+        antiguedad: undefined,
+        antiguedadTiempo: undefined,
         descripcion: "",
         imagenes: []
     });
@@ -39,6 +40,8 @@ export default function Admin() {
             // Remueve las comas antes de guardar en el estado
             const numericValue = Number(value.replace(/,/g, ""));
             setFormData({ ...formData, [name]: numericValue });
+        } else if (name === "terrenoTotal" || name === "terrenoConstruccion" || name === "recamaras" || name === "banos" || name === "estacionamientos" || name === "antiguedadTiempo") {
+            setFormData({ ...formData, [name]: Number(value) });
         } else {
             setFormData({ ...formData, [name]: value });
         }
@@ -86,6 +89,7 @@ export default function Admin() {
                 banos: undefined,
                 estacionamientos: undefined,
                 antiguedad: "nueva",
+                antiguedadTiempo: undefined,
                 descripcion: "",
                 imagenes: []
             });
@@ -100,7 +104,7 @@ export default function Admin() {
 
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
-            <h1 className="text-lg uppercase text-default-300 text-center pt-2">
+            <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
                 Agregar Casa
             </h1>
             <section>
@@ -109,7 +113,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="nombre"
-                        label="Nombre"
+                        label="Título"
                         value={formData.nombre}
                         onChange={handleInputChange}
                         size="lg"
@@ -119,7 +123,7 @@ export default function Admin() {
                         color="primary"
                         name="precio"
                         label="Precio"
-                        type="text"
+                        type="number"
                         value={formatNumberWithCommas(formData.precio)}
                         onChange={handleInputChange}
                         size="lg"
@@ -128,7 +132,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="terrenoTotal"
-                        label="Terreno Total"
+                        label="Metros Terreno"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
                         onChange={handleInputChange}
@@ -138,7 +142,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="terrenoConstruccion"
-                        label="Terreno Construccion"
+                        label="Metros Construcción"
                         type="number"
                         value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
@@ -148,7 +152,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="recamaras"
-                        label="Recamaras"
+                        label="Recámaras"
                         type="number"
                         value={formData.recamaras?.toString()}
                         onChange={handleInputChange}
@@ -178,7 +182,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="antiguedad"
-                        label="Antiguedad"
+                        label="Antigüedad"
                         selectedKeys={[formData.antiguedad] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -189,6 +193,18 @@ export default function Admin() {
                             </SelectItem>
                         ))}
                     </Select>
+                    {formData.antiguedad === "usada" && (
+                        <Input
+                            variant="bordered"
+                            color="primary"
+                            name="estacionamientos"
+                            label="Años Antigüedad"
+                            type="number"
+                            value={formData.antiguedadTiempo?.toString()}
+                            onChange={handleInputChange}
+                            size="lg"
+                        />
+                    )}
                     <Textarea
                         variant="bordered"
                         color="primary"

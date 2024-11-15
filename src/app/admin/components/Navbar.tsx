@@ -7,12 +7,12 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
 
     const menuItems = [
         {
-            label: "Casas",
+            label: "Propiedades",
             icon: "home",
             href: "/admin",
         },
         {
-            label: "Agregar Casa",
+            label: "Agregar Propiedad",
             icon: "home",
             href: "/admin/new",
         },

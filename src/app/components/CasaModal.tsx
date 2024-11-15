@@ -50,15 +50,17 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                                     <h1 className="font-semibold text-lg text-default-800">
                                         ${Number(casa.precio).toLocaleString()} MXN
                                     </h1>
-                                    <Button color="primary" className="text-lg" size="md" onPress={onClose}>
-                                        <WaIcon />Informes
-                                    </Button>
+                                    <a href={`https://wa.me/521234567890?text=Hola,%20estoy%20interesado/a%20en%20obtener%20más%20información%20sobre%20una%20propiedad.%20¿Podría%20darme%20detalles%20adicionales%20de%20${casa.nombre}?%20Gracias!`}>
+                                        <Button color="primary" className="text-lg" size="md">
+                                            <WaIcon />Informes
+                                        </Button>
+                                    </a>
                                 </div>
                             </ModalFooter>
                         </>
                     )}
                 </ModalContent>
-            </Modal>
+            </Modal >
         </>
     );
 }

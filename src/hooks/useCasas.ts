@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { getAllCasas } from "@/server";
 import { Casa } from "@/types/Casa";
 
-export function useCasas() {
+type Filter = {
+  key: string;
+  value: [number, number];
+};
+
+export function useCasas(filter?: Filter) {
   const [casas, setCasas] = useState<Casa[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -13,7 +18,7 @@ export function useCasas() {
       setError(null);
 
       try {
-        const casasData = await getAllCasas();
+        const casasData = await getAllCasas(filter);
         setCasas(casasData);
       } catch (err) {
         console.error("Error al obtener las casas:", err);
@@ -24,7 +29,7 @@ export function useCasas() {
     };
 
     fetchCasas();
-  }, []);
+  }, [filter]); // Agrega filter como dependencia para ejecutar el efecto cuando cambie
 
   return { casas, loading, error };
 }

@@ -27,6 +27,7 @@ export default function AdminEdit({
         banos: 0,
         estacionamientos: 0,
         antiguedad: 'nueva',
+        antiguedadTiempo: 0,
         descripcion: '',
         imagenes: []
     });
@@ -46,13 +47,14 @@ export default function AdminEdit({
                 setFormData({
                     id: data.id,
                     nombre: data.nombre || '',
-                    precio: Number(formatNumberWithCommas(data.precio)) || 0,
+                    precio: data.precio || 0,
                     terrenoTotal: data.terrenoTotal || 0,
                     terrenoConstruccion: data.terrenoConstruccion || 0,
                     recamaras: data.recamaras || 0,
                     banos: data.banos || 0,
                     estacionamientos: data.estacionamientos || 0,
                     antiguedad: data.antiguedad || 'nueva',
+                    antiguedadTiempo: data.antiguedadTiempo || 0,
                     descripcion: data.descripcion || '',
                     imagenes: data.imagenes || []
                 });
@@ -81,6 +83,8 @@ export default function AdminEdit({
             // Remueve las comas antes de guardar en el estado
             const numericValue = Number(value.replace(/,/g, ""));
             setFormData({ ...formData, [name]: numericValue });
+        } else if (name === "terrenoTotal" || name === "terrenoConstruccion" || name === "recamaras" || name === "banos" || name === "estacionamientos" || name === "antiguedadTiempo") {
+            setFormData({ ...formData, [name]: Number(value) });
         } else {
             setFormData({ ...formData, [name]: value });
         }
@@ -111,14 +115,10 @@ export default function AdminEdit({
             validImages.push(...imagesSaved);
         }
 
-        // Remueve las comas antes de guardar en el estado
-        const numericValue = Number(String(formData.precio).replace(/,/g, ""));
-
         // Crear un objeto `casa` actualizado con las imágenes válidas
         const casaData: Casa = {
             ...formData,
             imagenes: validImages,
-            precio: numericValue,
         };
 
         // Guardar en la base de datos
@@ -165,8 +165,8 @@ export default function AdminEdit({
 
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
-            <h1 className="text-lg uppercase text-default-300 text-center pt-2">
-                Editar Casa
+            <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
+                Editar Propiedad
             </h1>
             <section>
                 <form className="flex h-full flex-col p-2 space-y-3">
@@ -174,7 +174,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="nombre"
-                        label="Nombre"
+                        label="Título"
                         value={formData.nombre}
                         onChange={handleInputChange}
                         size="lg"
@@ -193,7 +193,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="terrenoTotal"
-                        label="Terreno Total"
+                        label="Metros Terreno"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
                         onChange={handleInputChange}
@@ -203,7 +203,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="terrenoConstruccion"
-                        label="Terreno Construccion"
+                        label="Metros Construcción"
                         type="number"
                         value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
@@ -213,7 +213,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="recamaras"
-                        label="Recamaras"
+                        label="Recámaras"
                         type="number"
                         value={formData.recamaras?.toString()}
                         onChange={handleInputChange}
@@ -243,7 +243,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="antiguedad"
-                        label="Antiguedad"
+                        label="Antigüedad"
                         selectedKeys={[formData.antiguedad] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -254,11 +254,23 @@ export default function AdminEdit({
                             </SelectItem>
                         ))}
                     </Select>
+                    {formData.antiguedad === "usada" && (
+                        <Input
+                            variant="bordered"
+                            color="primary"
+                            name="antiguedadTiempo"
+                            label="Años Antigüedad"
+                            type="number"
+                            value={formData.antiguedadTiempo?.toString()}
+                            onChange={handleInputChange}
+                            size="lg"
+                        />
+                    )}
                     <Textarea
                         variant="bordered"
                         color="primary"
                         name="descripcion"
-                        label="Descripcion"
+                        label="Descripción"
                         value={formData.descripcion}
                         onChange={handleInputChange}
                         size="lg"
@@ -267,12 +279,6 @@ export default function AdminEdit({
             </section>
             <section>
                 <ImageUpload images={images} setImages={setImages} imagesSaved={imagesSaved} setImagesSaved={setImagesSaved} />
-                <p>
-                    Cantidad de imagenes guardadas anteriormente: {imagesSaved.length}
-                </p>
-                <p>
-                    Cantidad de imagenes nuevas: {images.length - 1}
-                </p>
             </section>
             <div className="flex w-full p-2 justify-between">
                 <Button color="danger" onPress={handleDelete} variant="flat" isLoading={loadingDelete}>
