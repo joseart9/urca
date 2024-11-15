@@ -63,7 +63,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     value={filter.value}
                     onChange={handleSliderChange}
                     renderLabel={(value) => ``}
-                    renderValue={(value) => `${filter.value}`}
+                    renderValue={() => `${filter.value[0]} - ${filter.value[1]}`}
                 />
             )}
 
@@ -75,7 +75,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     value={filter.value}
                     onChange={handleSliderChange}
                     renderLabel={(value) => ``}
-                    renderValue={(value) => `${filter.value}`}
+                    renderValue={() => `${filter.value[0]} - ${filter.value[1]}`}
                 />
             )}
 
@@ -87,7 +87,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     value={filter.value}
                     onChange={handleSliderChange}
                     renderLabel={(value) => ``}
-                    renderValue={(value) => `${filter.value}`}
+                    renderValue={() => `${filter.value[0]} - ${filter.value[1]}`}
                 />
             )}
 
@@ -99,7 +99,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
                     value={filter.value}
                     onChange={handleSliderChange}
                     renderLabel={(value) => ``}
-                    renderValue={(value) => `${filter.value} m²`}
+                    renderValue={() => `${filter.value[0]} - ${filter.value[1]} m²`}
                 />
             )}
         </div>
