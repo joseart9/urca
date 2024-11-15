@@ -5,7 +5,7 @@ import { useCasas } from "@/hooks/useCasas";
 import Navbar from "@/app/components/Navbar";
 import { Button, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
-import FilterModal from "./components/FIlterModal";
+import FilterModal from "@/app/components/FilterModal";
 
 export default function Home() {
   const [filter, setFilter] = useState<any>({
@@ -21,13 +21,11 @@ export default function Home() {
     </div>
   );
 
-  console.log(filter);
-
   return (
     <Navbar>
       <section className="min-h-screen bg-slate-100">
-        <div className="flex flex-row w-full items-center justify-between text-[#006FEE] text-xs pl-3 pr-3 align-middle bg-slate-200 uppercase">
-          <h1 >
+        <div className="md:justify-around flex flex-row w-full items-center justify-between text-[#006FEE] text-xs pl-3 pr-3 align-middle bg-slate-200 uppercase">
+          <h1>
             Claudia Uribe &nbsp;|&nbsp; Asesor Inmobiliario
           </h1>
           <div className="flex w-fit pb-1 pt-1">
@@ -39,7 +37,7 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="flex flex-wrap justify-center gap-5 md:pl-40 md:pr-40">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:px-10 md:p-4 lg:container lg:mx-auto justify-center">
           {casas.map((casa) => (
             <CasaCard key={casa.id} casa={casa} />
           ))}

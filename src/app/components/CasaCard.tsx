@@ -16,14 +16,14 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
-        <Card className="w-full md:h-fit md:w-[600px] rounded-none" shadow="md">
+        <Card className="w-full md:h-fit md:w-full rounded-none" shadow="md">
             <CardHeader className="p-0">
                 <Swiper
                     modules={[Pagination]}
                     pagination={{ dynamicBullets: true }}
                     spaceBetween={10}
                     slidesPerView={1}
-                    className="w-full h-[300px] md:h-[500px] mySwiper custom-swiper"
+                    className="w-full h-full md:h-[400px] mySwiper custom-swiper"
                     loop
                 >
                     {casa.imagenes?.map((imagen) => (
