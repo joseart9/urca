@@ -21,7 +21,8 @@ export default function Admin() {
         recamaras: undefined,
         banos: undefined,
         estacionamientos: undefined,
-        antiguedad: "nueva",
+        antiguedad: undefined,
+        antiguedadTiempo: undefined,
         descripcion: "",
         imagenes: []
     });
@@ -39,6 +40,8 @@ export default function Admin() {
             // Remueve las comas antes de guardar en el estado
             const numericValue = Number(value.replace(/,/g, ""));
             setFormData({ ...formData, [name]: numericValue });
+        } else if (name === "terrenoTotal" || name === "terrenoConstruccion" || name === "recamaras" || name === "banos" || name === "estacionamientos" || name === "antiguedadTiempo") {
+            setFormData({ ...formData, [name]: Number(value) });
         } else {
             setFormData({ ...formData, [name]: value });
         }
@@ -86,6 +89,7 @@ export default function Admin() {
                 banos: undefined,
                 estacionamientos: undefined,
                 antiguedad: "nueva",
+                antiguedadTiempo: undefined,
                 descripcion: "",
                 imagenes: []
             });
@@ -119,7 +123,7 @@ export default function Admin() {
                         color="primary"
                         name="precio"
                         label="Precio"
-                        type="text"
+                        type="number"
                         value={formatNumberWithCommas(formData.precio)}
                         onChange={handleInputChange}
                         size="lg"

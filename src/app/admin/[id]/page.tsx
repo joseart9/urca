@@ -83,6 +83,8 @@ export default function AdminEdit({
             // Remueve las comas antes de guardar en el estado
             const numericValue = Number(value.replace(/,/g, ""));
             setFormData({ ...formData, [name]: numericValue });
+        } else if (name === "terrenoTotal" || name === "terrenoConstruccion" || name === "recamaras" || name === "banos" || name === "estacionamientos" || name === "antiguedadTiempo") {
+            setFormData({ ...formData, [name]: Number(value) });
         } else {
             setFormData({ ...formData, [name]: value });
         }
