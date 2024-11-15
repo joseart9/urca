@@ -105,7 +105,7 @@ export default function Admin() {
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
             <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
-                Agregar Casa
+                Agregar Propiedad
             </h1>
             <section>
                 <form className="flex h-full flex-col p-2 space-y-3">
