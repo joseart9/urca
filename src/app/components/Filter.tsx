@@ -84,7 +84,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
 
             {filter.key === "estacionamientos" && (
                 <Slider
-                    label="Garajes"
+                    label="Estacionamientos"
                     minValue={0}
                     maxValue={10}
                     value={filter.value}
