@@ -31,27 +31,3 @@ export async function uploadImageToImgBB(file: File): Promise<CasaImg> {
     throw error;
   }
 }
-
-// export const uploadImageToImgBB = async (file: File): Promise<CasaImg> => {
-//   const formData = new FormData();
-//   formData.append("image", file);
-
-//   try {
-//     const response = await fetch(
-//       `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMG_BB_KEY}`,
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
-//     const data = await response.json();
-//     if (data.success) {
-//       return data.data.url;
-//     } else {
-//       throw new Error("Error al subir la imagen a ImgBB");
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// };

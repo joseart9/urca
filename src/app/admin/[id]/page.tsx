@@ -69,8 +69,6 @@ export default function AdminEdit({
         });
     }, [casaId]);
 
-    console.log(formData);
-
     const casaAntiguedad = [
         { key: "nueva", label: "Nueva" },
         { key: "usada", label: "Usada" },
