@@ -9,7 +9,7 @@ export default function Filter({ filter, setFilter, classNames, variant }: { fil
         { key: "precio", label: "Precio" },
         { key: "recamaras", label: "Habitaciones" },
         { key: "banos", label: "Baños" },
-        { key: "estacionamientos", label: "Garajes" },
+        { key: "estacionamientos", label: "Estacionamientos" },
         { key: "terrenoConstruccion", label: "Área" },
         { key: "antiguedad", label: "Antigüedad" },
     ]
