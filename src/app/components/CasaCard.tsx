@@ -16,7 +16,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
-        <Card className="w-full md:h-fit md:w-full rounded-none" shadow="md">
+        <Card className="hover:transition hover:ease-in-out hover:delay-150 w-full md:h-fit md:w-full rounded-none hover:shadow-2xl shadow-2xl md:shadow-md" shadow="md">
             <CardHeader className="p-0">
                 <Swiper
                     modules={[Pagination]}
@@ -49,7 +49,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
                 <div className="flex flex-row w-full justify-between items-center p-2 text-center">
                     <p className="font-semibold text-lg md:text-2xl">${Number(casa.precio).toLocaleString()} MXN</p>
 
-                    <Button color="primary" variant="solid" size="lg" className="md:text-xl" onPress={onOpen}>
+                    <Button color="primary" variant="solid" size="lg" className="md:text-xl uppercase" onPress={onOpen}>
                         Ver más
                     </Button>
                 </div>

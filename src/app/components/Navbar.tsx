@@ -9,7 +9,7 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
                 isBordered
             >
                 <NavbarContent className="sm:hidden" justify="start">
-                    <a href="/" className="font-bold text-lg uppercase text-default-800">
+                    <a href="/" className="font-bold text-lg uppercase text-default-800 tracking-wider">
                         Urca Bienes Raíces
                     </a>
                 </NavbarContent>
