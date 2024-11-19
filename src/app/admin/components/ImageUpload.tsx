@@ -73,7 +73,7 @@ export default function ImageUpload({ images, setImages, imagesSaved, setImagesS
                         )}
                         {image && (
                             <button
-                                onClick={() => handleDelete(index, true)}
+                                onClick={() => handleDelete(index)}
                                 className="absolute -top-2 -right-3 font-bold bg-red-500 text-white rounded-full p-1"
                             >
                                 <svg
