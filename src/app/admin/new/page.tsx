@@ -106,7 +106,7 @@ export default function Admin() {
                 tipoPropiedad: undefined,
                 tipoOperacion: undefined
             });
-            alert("Casa guardada", "success");
+            alert("Propiedad guardada", "success");
             setImages([null as any]);
         } catch (error) {
             setLoading(false);
@@ -117,7 +117,7 @@ export default function Admin() {
 
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
-            <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
+            <h1 className="text-lg uppercase text-default-500 text-center pt-2">
                 Agregar Propiedad
             </h1>
             <section>
@@ -145,7 +145,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="terrenoTotal"
-                        label="Metros Terreno"
+                        label="Metros de Terreno"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
                         onChange={handleInputChange}
@@ -155,7 +155,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="terrenoConstruccion"
-                        label="Metros Construcción"
+                        label="Metros de Construcción"
                         type="number"
                         value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
@@ -195,7 +195,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="tipoPropiedad"
-                        label="Tipo Propiedad"
+                        label="Tipo de Propiedad"
                         selectedKeys={[formData.tipoPropiedad] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -210,7 +210,7 @@ export default function Admin() {
                         variant="bordered"
                         color="primary"
                         name="tipoOperacion"
-                        label="Tipo Operación"
+                        label="Tipo de Operación"
                         selectedKeys={[formData.tipoOperacion] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -241,7 +241,7 @@ export default function Admin() {
                             variant="bordered"
                             color="primary"
                             name="estacionamientos"
-                            label="Años Antigüedad"
+                            label="Años de Antigüedad"
                             type="number"
                             value={formData.antiguedadTiempo?.toString()}
                             onChange={handleInputChange}

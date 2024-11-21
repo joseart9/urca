@@ -34,7 +34,7 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
 
                 <NavbarContent className="sm:hidden pr-3" justify="center">
                     <NavbarBrand>
-                        <img src="/logo.svg" alt="Logo" className="h-16 w-auto object-cover" />
+                        <img src="/logo.png" alt="Logo" className="h-16 w-auto object-cover" />
                     </NavbarBrand>
                 </NavbarContent>
 
@@ -61,7 +61,7 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
                         <p className="text-xl uppercase">
                             ADMIN
                         </p>
-                        <img src="/logo.svg" alt="Logo" className="h-16 w-auto" />
+                        <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
                     </NavbarBrand>
                 </NavbarContent>
 

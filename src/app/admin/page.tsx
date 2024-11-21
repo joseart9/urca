@@ -15,7 +15,7 @@ export default function Admin() {
 
     return (
         <div>
-            <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
+            <h1 className="text-lg uppercase text-default-500 text-center pt-2">
                 Propiedades
             </h1>
             <section className="flex flex-wrap justify-center gap-5 md:pl-40 md:pr-40">

@@ -3,7 +3,7 @@
 import { getCasaById, updateCasa, deleteCasa } from "@/server";
 import { Casa } from "@/types/Casa";
 import { use, useState, useEffect } from "react";
-import { Button, Input, Select, SelectItem, Spinner, Textarea } from "@nextui-org/react";
+import { Button, Input, Modal, ModalContent, ModalFooter, Select, SelectItem, Spinner, Textarea } from "@nextui-org/react";
 import alert from "@/utils/Alert";
 import { uploadImageToImgBB } from "@/utils/uploadImageToImgBB";
 import ImageUpload from "@/app/admin/components/ImageUpload";
@@ -39,6 +39,8 @@ export default function AdminEdit({
     const [error, setError] = useState(false);
 
     const router = useRouter();
+
+    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
 
     useEffect(() => {
         setLoading(true);
@@ -176,7 +178,7 @@ export default function AdminEdit({
 
     return (
         <div className="flex flex-col min-h-screen md:pl-52 md:pr-52">
-            <h1 className="text-lg uppercase text-blue-300 text-center pt-2">
+            <h1 className="text-lg uppercase text-default-500 text-center pt-2">
                 Editar Propiedad
             </h1>
             <section>
@@ -204,7 +206,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="terrenoTotal"
-                        label="Metros Terreno"
+                        label="Metros de Terreno"
                         type="number"
                         value={formData.terrenoTotal?.toString()}
                         onChange={handleInputChange}
@@ -214,7 +216,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="terrenoConstruccion"
-                        label="Metros Construcción"
+                        label="Metros de Construcción"
                         type="number"
                         value={formData.terrenoConstruccion?.toString()}
                         onChange={handleInputChange}
@@ -254,7 +256,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="tipoPropiedad"
-                        label="Tipo Propiedad"
+                        label="Tipo de Propiedad"
                         selectedKeys={[formData.tipoPropiedad] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -269,7 +271,7 @@ export default function AdminEdit({
                         variant="bordered"
                         color="primary"
                         name="tipoOperacion"
-                        label="Tipo Operación"
+                        label="Tipo de Operación"
                         selectedKeys={[formData.tipoOperacion] as string[]}
                         onChange={handleInputChange}
                         size="lg"
@@ -300,7 +302,7 @@ export default function AdminEdit({
                             variant="bordered"
                             color="primary"
                             name="antiguedadTiempo"
-                            label="Años Antigüedad"
+                            label="Años de Antigüedad"
                             type="number"
                             value={formData.antiguedadTiempo?.toString()}
                             onChange={handleInputChange}
@@ -322,13 +324,33 @@ export default function AdminEdit({
                 <ImageUpload images={images} setImages={setImages} imagesSaved={imagesSaved} setImagesSaved={setImagesSaved} />
             </section>
             <div className="flex w-full p-2 justify-between">
-                <Button color="danger" onPress={handleDelete} variant="flat" isLoading={loadingDelete}>
+                <Button color="danger" onPress={() => setIsModalOpen(true)} variant="flat" isLoading={loadingDelete}>
                     Eliminar
                 </Button>
                 <Button color="primary" onPress={handleSave} variant="solid" isLoading={loadingSave}>
                     Guardar
                 </Button>
             </div>
+
+            {/* Modal de confirmación */}
+            <Modal isOpen={isModalOpen} hideCloseButton onClose={() => setIsModalOpen(false)}>
+                <ModalContent>
+                    <div className="p-4">
+                        <h3 className="text-lg font-semibold text-default-500">¿Estás seguro de que deseas eliminar esta propiedad?</h3>
+                        <p className="text-sm text-default-400 mt-2">
+                            Esta acción no se puede deshacer y eliminará permanentemente la información de esta propiedad.
+                        </p>
+                    </div>
+                    <ModalFooter>
+                        <Button color="default" variant="bordered" onPress={() => setIsModalOpen(false)}>
+                            Cancelar
+                        </Button>
+                        <Button color="danger" onPress={handleDelete} isLoading={loadingDelete}>
+                            Confirmar
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </div>
     )
 }
