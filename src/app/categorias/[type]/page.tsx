@@ -18,8 +18,7 @@ export default function Categorias({
         value: [0, 0],
     });
     const { type: typeKey } = use(params);
-    const [seccion, setSeccion] = useState("casas");
-    const { casas, loading, error } = useCasas(filter, "venta"); // Pasa el filtro al hook
+    const { casas, loading, error } = useCasas(filter, typeKey); // Pasa el filtro al hook
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     if (loading) return (

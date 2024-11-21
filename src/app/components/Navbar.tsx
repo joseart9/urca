@@ -21,12 +21,11 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
 
     return (
         <>
-            <Navbar>
+            <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
                 <NavbarContent className="sm:hidden" justify="start">
                     <NavbarMenuToggle
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                         className="sm:hidden"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
                     />
                     {!isMenuOpen && (
                         <a href="/" className="font-bold text-default-800 text-sm text-ellipsis uppercase tracking-wider">
@@ -47,7 +46,6 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
                     <NavbarMenuToggle
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                         className=""
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
                     />
                     {!isMenuOpen && (
                         <a href="/" className="font-bold text-2xl uppercase text-[#006FEE]">
