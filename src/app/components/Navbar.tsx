@@ -21,34 +21,46 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
 
     return (
         <>
-            <Navbar
-                isBordered
-            >
+            <Navbar>
                 <NavbarContent className="sm:hidden" justify="start">
                     <NavbarMenuToggle
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                         className="sm:hidden"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
                     />
-                    <a href="/" className="font-bold text-[#006FEE] text-lg uppercase tracking-wider">
-                        Urca Bienes Raíces
-                    </a>
+                    {!isMenuOpen && (
+                        <a href="/" className="font-bold text-default-800 text-sm text-ellipsis uppercase tracking-wider">
+                            Urca Bienes Raíces
+                        </a>
+                    )}
                 </NavbarContent>
 
                 <NavbarContent className="sm:hidden pr-3" justify="center">
                     <NavbarBrand>
-                        <img src="/logo.svg" alt="Logo" className="h-16 w-auto object-cover" />
+                        {!isMenuOpen && (
+                            <img src="/logo.png" alt="Logo" className="h-16 w-auto object-cover" />
+                        )}
                     </NavbarBrand>
                 </NavbarContent>
 
                 <NavbarContent className="hidden sm:flex gap-4" justify="start">
-                    <a href="/" className="font-bold text-2xl uppercase text-[#006FEE]">
-                        Urca Bienes Raíces
-                    </a>
+                    <NavbarMenuToggle
+                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                        className=""
+                    />
+                    {isMenuOpen && (
+                        <a href="/" className="font-bold text-2xl uppercase text-[#006FEE]">
+                            Urca Bienes Raíces
+                        </a>
+                    )}
+
                 </NavbarContent>
 
                 <NavbarContent className="hidden sm:flex gap-4" justify="center">
                     <NavbarBrand>
-                        <img src="/logo.svg" alt="Logo" className="h-16 w-auto" />
+                        {isMenuOpen && (
+                            <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+                        )}
                     </NavbarBrand>
                 </NavbarContent>
 

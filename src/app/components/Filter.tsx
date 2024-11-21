@@ -42,7 +42,7 @@ export default function Filter({
                 name="key"
                 color="default"
                 variant="underlined"
-                placeholder="Filtrar por"
+                placeholder="Selecciona una opción"
                 selectionMode="single"
                 selectedKeys={filter.key ? [filters.find((f) => f.key === filter.key)?.label || ""] : []}
                 onSelectionChange={(keys) => handleInputChange(String(Array.from(keys)[0]))}

@@ -34,7 +34,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
                         pagination={{ dynamicBullets: true }}
                         spaceBetween={10}
                         slidesPerView={1}
-                        className="w-full h-[500px] md:h-[500px] mySwiper custom-swiper"
+                        className="w-full h-[300px] md:h-[500px] mySwiper custom-swiper"
                         loop
                     >
                         {casa.imagenes?.map((imagen, index) => (

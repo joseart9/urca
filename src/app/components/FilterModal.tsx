@@ -9,8 +9,6 @@ export default function FilterModal({ isOpen, onOpenChange, filter, setFilter }:
         value: filter.value,
     });
 
-    console.log(filterMock);
-
     const handleSave = () => {
         setFilter(filterMock);
         onOpenChange(false);
@@ -22,7 +20,7 @@ export default function FilterModal({ isOpen, onOpenChange, filter, setFilter }:
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Filtrar</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1"></ModalHeader>
                             <ModalBody>
                                 <Filter filter={filterMock} setFilter={setFilterMock} />
                             </ModalBody>

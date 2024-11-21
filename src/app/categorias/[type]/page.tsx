@@ -22,10 +22,6 @@ export default function Categorias({
     const { casas, loading, error } = useCasas(filter, "venta"); // Pasa el filtro al hook
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-
-
-    console.log(typeKey);
-
     if (loading) return (
         <div className="flex justify-center items-center min-h-screen">
             <Spinner color="primary" />
