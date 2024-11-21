@@ -27,7 +27,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
 
     return (
         <>
-            <Card className="h-auto hover:transition hover:ease-in-out hover:delay-150 w-full md:h-fit md:w-full rounded-none hover:shadow-2xl shadow-2xl md:shadow-md" shadow="md">
+            <Card className="hover:transition hover:ease-in-out hover:delay-150 w-full md:h-fit md:w-full rounded-none hover:shadow-2xl shadow-2xl md:shadow-md" shadow="md">
                 <CardHeader className="p-0">
                     <Swiper
                         modules={[Pagination]}

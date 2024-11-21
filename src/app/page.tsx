@@ -12,7 +12,6 @@ export default function Home() {
     key: undefined,
     value: [0, 0],
   });
-  const [seccion, setSeccion] = useState("casas");
   const { casas, loading, error } = useCasas(filter); // Pasa el filtro al hook
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -24,7 +23,7 @@ export default function Home() {
 
   return (
     <Navbar>
-      <section className="min-h-screen bg-slate-100">
+      <section className="w-full h-full bg-slate-100">
         <div className="flex flex-row w-full items-center text-[#006FEE] bg-[#006FEE]/5 uppercase">
           <div className="flex flex-row w-fit pb-1 pt-1 px-2 items-center justify-start text-left">
             <Button radius="full" color="primary" variant="bordered" size="sm" className="" onPress={onOpen}>
@@ -57,13 +56,13 @@ export default function Home() {
             <CasaCard key={casa.id} casa={casa} />
           ))}
         </section>
+        <footer className="bg-[#006FEE]/15 text-[#006FEE]/50 text-md text-center pt-7 pb-5">
+          <a href="https://www.instagram.com/araf.innovations/">
+            Powered by Araf Innovations 2024
+          </a>
+        </footer>
       </section>
       <FilterModal isOpen={isOpen} onOpenChange={onOpenChange} filter={filter} setFilter={setFilter} />
-      <footer className="bg-[#006FEE]/15 text-[#006FEE]/50 text-md text-center pt-7 pb-5">
-        <a href="https://www.instagram.com/araf.innovations/">
-          Powered by Araf Innovations 2024
-        </a>
-      </footer>
     </Navbar>
   );
 }

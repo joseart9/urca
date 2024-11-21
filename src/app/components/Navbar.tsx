@@ -47,8 +47,9 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
                     <NavbarMenuToggle
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                         className=""
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
                     />
-                    {isMenuOpen && (
+                    {!isMenuOpen && (
                         <a href="/" className="font-bold text-2xl uppercase text-[#006FEE]">
                             Urca Bienes Raíces
                         </a>
@@ -58,7 +59,7 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
 
                 <NavbarContent className="hidden sm:flex gap-4" justify="center">
                     <NavbarBrand>
-                        {isMenuOpen && (
+                        {!isMenuOpen && (
                             <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
                         )}
                     </NavbarBrand>
@@ -84,7 +85,9 @@ export default function App({ children }: Readonly<{ children?: React.ReactNode 
                     ))}
                 </NavbarMenu>
             </Navbar>
-            {children}
+            <section className="w-full h-full">
+                {children}
+            </section>
         </>
     );
 }
