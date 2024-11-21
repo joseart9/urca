@@ -29,7 +29,7 @@ export default function Categorias({
 
     return (
         <Navbar>
-            <section className="min-h-screen bg-slate-100">
+            <section className="w-full h-full bg-slate-100">
                 <div className="flex flex-row w-full items-center text-[#006FEE] bg-[#006FEE]/5 uppercase">
                     <div className="flex flex-row w-fit pb-1 pt-1 items-center justify-start text-left">
                         <Button radius="full" size="sm" className="bg-transparent" onPress={onOpen}>

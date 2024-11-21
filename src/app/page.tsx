@@ -32,9 +32,9 @@ export default function Home() {
                 <p className="text-[#006FEE]">
                   {filter && filter.key
                     ? filter.key === "tipoPropiedad"
-                      ? filter.value
+                      ? filter.value + "s"
                       : filter.key
-                    : "Ordenar por"}
+                    : "Filtrar"}
                 </p>
               </div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-[#006FEE]">
