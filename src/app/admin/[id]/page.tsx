@@ -138,12 +138,12 @@ export default function AdminEdit({
         try {
             await updateCasa(casaData.id, casaData);
             setLoadingSave(false);
-            alert("Casa guardada", "success");
+            alert("Propiedad guardada", "success");
             setImages([null as any]);
         } catch (error) {
             setLoadingSave(false);
             setImages([null as any]);
-            alert("Error al guardar la casa, contacte a un administrador", "error");
+            alert("Error al guardar la propiedad, contacte a un administrador", "error");
             console.log("Error al guardar la casa: ", error);
         }
     }

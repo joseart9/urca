@@ -110,7 +110,7 @@ export default function Admin() {
             setImages([null as any]);
         } catch (error) {
             setLoading(false);
-            alert("Error al guardar la casa, contacte a un administrador", "error");
+            alert("Error al guardar la propiedad, contacte a un administrador", "error");
             console.log("Error al guardar la casa: ", error);
         }
     }
