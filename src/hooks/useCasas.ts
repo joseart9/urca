@@ -7,7 +7,7 @@ type Filter = {
   value: [number, number];
 };
 
-export function useCasas(filter?: Filter) {
+export function useCasas(filter?: Filter, subFilter?: string) {
   const [casas, setCasas] = useState<Casa[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ export function useCasas(filter?: Filter) {
       setError(null);
 
       try {
-        const casasData = await getAllCasas(filter);
+        const casasData = await getAllCasas(filter, subFilter);
         setCasas(casasData);
       } catch (err) {
         console.error("Error al obtener las casas:", err);

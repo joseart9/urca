@@ -12,6 +12,7 @@ export default function Home() {
     key: undefined,
     value: [0, 0],
   });
+  const [seccion, setSeccion] = useState("casas");
   const { casas, loading, error } = useCasas(filter); // Pasa el filtro al hook
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -21,19 +22,34 @@ export default function Home() {
     </div>
   );
 
+  console.log(filter);
+
   return (
     <Navbar>
       <section className="min-h-screen bg-slate-100">
-        <div className="md:justify-around tracking-widest flex flex-row w-full items-center justify-between text-[#006FEE] text-xs pl-3 pr-3 align-middle bg-slate-200 uppercase">
-          <h1>
-            Claudia Uribe &nbsp;|&nbsp; Asesor Inmobiliario
-          </h1>
-          <div className="flex w-fit pb-1 pt-1">
-            <Button isIconOnly radius="full" size="sm" className="bg-transparent" onPress={onOpen}>
+        <div className="flex flex-row w-full items-center text-[#006FEE] bg-[#006FEE]/5 uppercase">
+          <div className="flex flex-row w-fit pb-1 pt-1 items-center justify-start text-left">
+            <Button radius="full" size="sm" className="bg-transparent" onPress={onOpen}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-[#006FEE] p-[2px]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
               </svg>
+              <div className="flex flex-row items-center space-x-2">
+                <p className="text-[#006FEE] uppercase">
+                  {filter && filter.key
+                    ? filter.key === "tipoPropiedad"
+                      ? filter.value
+                      : filter.key
+                    : "Filtrar"}
+                </p>
+              </div>
             </Button>
+            {filter.key !== undefined && (
+              <Button onPress={(e) => setFilter({ key: undefined, value: [0, 0] })} isIconOnly size="sm" className="bg-transparent text-[#006FEE]/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            )}
           </div>
         </div>
 
@@ -44,7 +60,7 @@ export default function Home() {
         </section>
       </section>
       <FilterModal isOpen={isOpen} onOpenChange={onOpenChange} filter={filter} setFilter={setFilter} />
-      <footer className="bg-slate-200 text-[#006FEE]/50 text-md text-center pt-7 pb-5">
+      <footer className="bg-[#006FEE]/15 text-[#006FEE]/50 text-md text-center pt-7 pb-5">
         <a href="https://www.instagram.com/araf.innovations/">
           Powered by Araf Innovations 2024
         </a>

@@ -32,36 +32,47 @@ export async function addCasa(casa: Casa) {
   }
 }
 
-export async function getAllCasas(filter?: {
-  key: string;
-  value: [number, number]; // Cambiamos a tipo array de números
-}): Promise<Casa[]> {
+export async function getAllCasas(
+  filter?: {
+    key: string;
+    value: [number, number] | string; // Soporta rangos o valores específicos
+  },
+  subfilter?: string // Subfiltro para "Venta" o "Renta"
+): Promise<Casa[]> {
   try {
     // Referencia a la colección "casas"
     const casasCollection = collection(firestore, "casas");
 
-    let casasQuery;
+    let casasQuery: any = casasCollection;
 
-    // Verifica si el filtro está definido y aplica el rango
+    // Maneja filtros dinámicamente
     if (filter?.key && filter.value) {
-      const [min, max] = filter.value; // Usamos el rango directamente
-      casasQuery = query(
-        casasCollection,
-        where(filter.key, ">=", min),
-        where(filter.key, "<=", max)
-      );
-    } else {
-      // Si no hay filtro, obtiene todos los documentos
-      casasQuery = casasCollection;
+      if (Array.isArray(filter.value)) {
+        // Si el valor es un rango
+        const [min, max] = filter.value;
+        casasQuery = query(
+          casasQuery,
+          where(filter.key, ">=", min),
+          where(filter.key, "<=", max)
+        );
+      } else {
+        // Si el valor es un string (ej. "casa", "departamento", etc.)
+        casasQuery = query(casasQuery, where(filter.key, "==", filter.value));
+      }
     }
 
-    // Obtiene los documentos según la consulta (con o sin filtro)
+    // Agrega el subfiltro si está definido
+    if (subfilter) {
+      casasQuery = query(casasQuery, where("tipoOperacion", "==", subfilter));
+    }
+
+    // Obtiene los documentos según la consulta
     const snapshot = await getDocs(casasQuery);
 
     // Mapea los documentos a un array de objetos "Casa"
     const casas = snapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data(),
+      ...(doc.data() as object),
     })) as Casa[];
 
     return casas;

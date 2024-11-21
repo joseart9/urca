@@ -56,7 +56,9 @@ export default function AdminEdit({
                     antiguedad: data.antiguedad || 'nueva',
                     antiguedadTiempo: data.antiguedadTiempo || 0,
                     descripcion: data.descripcion || '',
-                    imagenes: data.imagenes || []
+                    imagenes: data.imagenes || [],
+                    tipoPropiedad: data.tipoPropiedad || 'casa',
+                    tipoOperacion: data.tipoOperacion || 'venta'
                 });
                 setImagesSaved(data.imagenes || []);
             } else {
@@ -72,6 +74,17 @@ export default function AdminEdit({
     const casaAntiguedad = [
         { key: "nueva", label: "Nueva" },
         { key: "usada", label: "Usada" },
+    ];
+
+    const casaTipoPropiedad = [
+        { key: "casa", label: "Casa" },
+        { key: "departamento", label: "Departamento" },
+        { key: "otro", label: "Otros" },
+    ];
+
+    const casaTipoOperacion = [
+        { key: "venta", label: "Venta" },
+        { key: "renta", label: "Renta" },
     ];
 
     const handleInputChange = (e: any) => {
@@ -237,6 +250,36 @@ export default function AdminEdit({
                         onChange={handleInputChange}
                         size="lg"
                     />
+                    <Select
+                        variant="bordered"
+                        color="primary"
+                        name="tipoPropiedad"
+                        label="Tipo Propiedad"
+                        selectedKeys={[formData.tipoPropiedad] as string[]}
+                        onChange={handleInputChange}
+                        size="lg"
+                    >
+                        {casaTipoPropiedad.map((option) => (
+                            <SelectItem key={option.key} value={option.key}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
+                    <Select
+                        variant="bordered"
+                        color="primary"
+                        name="tipoOperacion"
+                        label="Tipo Operación"
+                        selectedKeys={[formData.tipoOperacion] as string[]}
+                        onChange={handleInputChange}
+                        size="lg"
+                    >
+                        {casaTipoOperacion.map((option) => (
+                            <SelectItem key={option.key} value={option.key}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
                     <Select
                         variant="bordered"
                         color="primary"

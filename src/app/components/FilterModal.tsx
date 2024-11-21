@@ -9,10 +9,13 @@ export default function FilterModal({ isOpen, onOpenChange, filter, setFilter }:
         value: filter.value,
     });
 
+    console.log(filterMock);
+
     const handleSave = () => {
         setFilter(filterMock);
         onOpenChange(false);
     }
+
     return (
         <>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton>

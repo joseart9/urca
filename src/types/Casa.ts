@@ -13,4 +13,8 @@ export interface Casa {
   antiguedadTiempo?: number;
   imagenes?: CasaImg[];
   descripcion?: string;
+
+  // Seccion nueva
+  tipoPropiedad?: "casa" | "departamento" | "otros";
+  tipoOperacion?: "venta" | "renta";
 }

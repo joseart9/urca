@@ -33,6 +33,17 @@ export default function Admin() {
         { key: "usada", label: "Usada" },
     ];
 
+    const casaTipoPropiedad = [
+        { key: "casa", label: "Casa" },
+        { key: "departamento", label: "Departamento" },
+        { key: "otro", label: "Otros" },
+    ];
+
+    const casaTipoOperacion = [
+        { key: "venta", label: "Venta" },
+        { key: "renta", label: "Renta" },
+    ];
+
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
 
@@ -91,7 +102,9 @@ export default function Admin() {
                 antiguedad: "nueva",
                 antiguedadTiempo: undefined,
                 descripcion: "",
-                imagenes: []
+                imagenes: [],
+                tipoPropiedad: undefined,
+                tipoOperacion: undefined
             });
             alert("Casa guardada", "success");
             setImages([null as any]);
@@ -178,6 +191,36 @@ export default function Admin() {
                         onChange={handleInputChange}
                         size="lg"
                     />
+                    <Select
+                        variant="bordered"
+                        color="primary"
+                        name="tipoPropiedad"
+                        label="Tipo Propiedad"
+                        selectedKeys={[formData.tipoPropiedad] as string[]}
+                        onChange={handleInputChange}
+                        size="lg"
+                    >
+                        {casaTipoPropiedad.map((option) => (
+                            <SelectItem key={option.key} value={option.key}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
+                    <Select
+                        variant="bordered"
+                        color="primary"
+                        name="tipoOperacion"
+                        label="Tipo Operación"
+                        selectedKeys={[formData.tipoOperacion] as string[]}
+                        onChange={handleInputChange}
+                        size="lg"
+                    >
+                        {casaTipoOperacion.map((option) => (
+                            <SelectItem key={option.key} value={option.key}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
                     <Select
                         variant="bordered"
                         color="primary"
