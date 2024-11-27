@@ -27,7 +27,7 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
 
     return (
         <>
-            <Card className="hover:transition hover:ease-in-out hover:delay-150 w-full md:h-fit md:w-full rounded-none hover:shadow-2xl shadow-2xl md:shadow-md" shadow="md">
+            <Card className="hover:transition hover:ease-in-out hover:delay-150 w-full md:h-fit rounded-none hover:shadow-2xl shadow-2xl md:shadow-md min-h-[400px] md:min-h-[500px]" shadow="md">
                 <CardHeader className="p-0">
                     <Swiper
                         modules={[Pagination]}
@@ -50,15 +50,13 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
                     </Swiper>
                 </CardHeader>
                 <Divider />
-                <CardBody>
-                    <div className="flex flex-col space-y-8">
-                        <section className="flex flex-row justify-between items-center">
-                            <p className="text-lg md:text-2xl font-semibold">{casa.nombre}</p>
-                            <Chip color="primary" size="md" className="w-fit uppercase" variant="flat" >
-                                {casa.tipoPropiedad === "casa" ? "Casa" : "Departamento"} {casa.tipoOperacion === "venta" ? "en Venta" : "en Renta"}
-                            </Chip>
+                <CardBody className="w-full">
+                    <div className="flex flex-col space-y-8 min-w-full">
+                        <section className="flex flex-row w-full justify-between items-center">
+                            <p className="text-lg md:text-xl font-semibold w-full text-ellipsis line-clamp-2 min-h-[4rem]">
+                                {casa.nombre}
+                            </p>
                         </section>
-
                         <CasaInfo casa={casa} />
                     </div>
                 </CardBody>

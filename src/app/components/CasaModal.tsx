@@ -27,11 +27,12 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                                         </Button>
                                     </section>
                                     <Chip color="primary" size="md" className="w-fit uppercase" variant="flat" >
-                                        {casa.tipoPropiedad === "casa" ? "Casa" : "Departamento"} {casa.tipoOperacion === "venta" ? "en Venta" : "en Renta"}
+                                        {casa.tipoPropiedad === "casa" ? "Casa" : casa.tipoPropiedad === "departamento" ? "Depa" : ""} {casa.tipoOperacion === "venta" ? "en Venta" : "en Renta"}
                                     </Chip>
                                 </div>
                             </ModalHeader>
-                            <ModalBody className="flex flex-col space-y-4 w-full p-0 overflow-x-hidden">
+                            <ModalBody className="flex flex-col h-full space-y-4 w-full p-0 overflow-x-hidden mx-auto container">
+                                <p className="text-md font-semibold md:text-xl px-4">{casa.nombre}</p>
                                 <div className="flex-grow-0 w-full h-[600px] md:h-[600px] flex items-center justify-center">
                                     <Swiper
                                         modules={[Pagination]}
@@ -52,15 +53,15 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                                         ))}
                                     </Swiper>
                                 </div>
-                                <p className="text-md font-semibold md:text-xl px-4">{casa.nombre}</p>
+                                <div className="py-4" />
                                 <CasaInfo casa={casa} />
+                                <div className="py-2" />
                                 <Divider />
+                                <div className="py-2" />
                                 <p className="whitespace-pre-wrap text-default-800 text-md px-4">{casa.descripcion}</p>
                             </ModalBody>
                             <ModalFooter>
-                                <div className="flex flex-row items-center justify-between w-full overflow-x-hidden">
-
-
+                                <div className="flex flex-row items-center justify-around w-full overflow-x-hidden">
                                     <h1 className="font-semibold text-lg text-default-800">
                                         ${Number(casa.precio).toLocaleString()} MXN
                                     </h1>

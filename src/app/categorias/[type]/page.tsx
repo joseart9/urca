@@ -35,7 +35,7 @@ export default function Categorias({
                         <Button radius="full" color="primary" variant="bordered" size="sm" className="" onPress={onOpen}>
 
                             <div className="flex flex-row items-center space-x-2">
-                                <p className="text-[#006FEE]">
+                                <p className="text-[#006FEE] uppercase">
                                     {filter && filter.key
                                         ? filter.key === "tipoPropiedad"
                                             ? filter.value + "s"
