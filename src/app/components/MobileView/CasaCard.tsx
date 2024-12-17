@@ -4,10 +4,10 @@ import { Card, CardHeader, CardBody, CardFooter, Divider, Chip, useDisclosure, M
 import { Button } from "@nextui-org/button";
 import { Casa } from "@/types/Casa";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
-import CasaModal from "./CasaModal";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import CasaModal from "@/app/components/CasaModal";
 import 'swiper/css/bundle';
-import CasaInfo from "./CasaInfo";
+import CasaInfo from "@/app/components/CasaInfo";
 import { useState } from "react";
 
 export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
@@ -27,14 +27,15 @@ export default function CasaCard({ casa }: Readonly<{ casa: Casa }>) {
 
     return (
         <>
-            <Card className="hover:transition hover:ease-in-out hover:delay-150 w-full md:h-fit rounded-none hover:shadow-2xl shadow-2xl md:shadow-md min-h-[400px] md:min-h-[500px]" shadow="md">
+            <Card className="w-full h-[720px] rounded-none bg-white" shadow="none">
                 <CardHeader className="p-0">
                     <Swiper
-                        modules={[Pagination]}
+                        modules={[Pagination, Autoplay]}
                         pagination={{ dynamicBullets: true }}
+                        autoplay={{ delay: 3000 }}
                         spaceBetween={10}
                         slidesPerView={1}
-                        className="w-full h-[300px] md:h-[500px] mySwiper custom-swiper"
+                        className="w-full h-[300px]"
                         loop
                     >
                         {casa.imagenes?.map((imagen, index) => (

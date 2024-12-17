@@ -1,8 +1,9 @@
 import { Casa } from "@/types/Casa";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Divider, Chip } from "@nextui-org/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import 'swiper/css/bundle';
+import 'swiper/css/navigation';
 
 import CasaInfo from "./CasaInfo";
 
@@ -17,8 +18,8 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1 text-default-800 overflow-x-hidden p-2">
-                                <div className="flex flex-row justify-between items-center align-middle">
+                            <ModalHeader className="items-center w-full p-2 md:p-4 flex flex-col text-default-800 overflow-x-hidden">
+                                <div className="max-w-3xl md:px-4 flex flex-row justify-between items-center align-middle w-full">
                                     <section className="flex flex-row items-center text-center">
                                         <Button onPress={onClose} isIconOnly className="rounded-full bg-transparent flex items-center justify-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -31,12 +32,12 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                                     </Chip>
                                 </div>
                             </ModalHeader>
-                            <ModalBody className="flex flex-col h-full space-y-4 w-full p-0 overflow-x-hidden mx-auto container">
+                            <ModalBody className="flex flex-col h-full max-w-3xl space-y-4 w-full p-0 overflow-x-hidden mx-auto container">
                                 <p className="text-md font-semibold md:text-xl px-4">{casa.nombre}</p>
-                                <div className="flex-grow-0 w-full h-[600px] md:h-[600px] flex items-center justify-center">
+                                <div className="flex-grow-0 w-full h-[400px] flex items-center justify-center">
                                     <Swiper
-                                        modules={[Pagination]}
-                                        pagination={{ dynamicBullets: true }}
+                                        modules={[Navigation]}
+                                        navigation
                                         spaceBetween={10}
                                         slidesPerView={1}
                                         className="w-full h-full mySwiper custom-swiper rounded overflow-hidden"
@@ -53,12 +54,20 @@ export default function CasaModal({ isOpen, onOpenChange, casa }: Readonly<{ isO
                                         ))}
                                     </Swiper>
                                 </div>
-                                <div className="py-4" />
-                                <CasaInfo casa={casa} />
-                                <div className="py-2" />
-                                <Divider />
-                                <div className="py-2" />
+                                <div className="py-1" />
+
                                 <p className="whitespace-pre-wrap text-default-800 text-md px-4">{casa.descripcion}</p>
+
+                                <div className="py-1" />
+
+                                <Divider />
+
+                                <div className="py-1" />
+                                <div className="flex w-full items-center justify-center">
+                                    <div className="max-w-lg">
+                                        <CasaInfo casa={casa} /></div>
+                                </div>
+
                             </ModalBody>
                             <ModalFooter>
                                 <div className="flex flex-row items-center justify-around w-full overflow-x-hidden">

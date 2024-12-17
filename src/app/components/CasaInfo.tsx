@@ -3,7 +3,7 @@ import { Chip, Tooltip } from "@nextui-org/react";
 
 export default function CasaInfo({ casa }: Readonly<{ casa: Casa }>) {
     return (
-        <div className="grid grid-cols-3 grid-flow-row w-full justify-around text-center items-center gap-7">
+        <div className="grid grid-cols-3 grid-flow-row w-full flex-wrap text-center items-center gap-7">
             <div className="flex flex-col align-middle text-center items-center">
                 <Tooltip color="primary" showArrow content="Terreno de Total" placement="top" className="font-bold">
                     <img src="/terrenoTotal.svg" alt="Terreno" className="h-10 md:h-14 w-fit" />
